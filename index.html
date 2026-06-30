@@ -1,0 +1,722 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AppZoro — Atlanta's Digital Transformation Partner</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --red:#E63025;--red-dark:#B8241B;--ink:#0B0B0B;--ink-2:#141414;--ink-3:#1E1E1E;
+  --smoke:#F7F6F3;--smoke-2:#EFEDE9;--rule:#E2DFD9;--muted:#706B65;--on-dark:#B0A89F;--white:#FFFFFF;
+  --fd:'Syne','Trebuchet MS',system-ui,sans-serif;
+  --fb:'DM Sans','Segoe UI',system-ui,sans-serif;
+  --r-sm:8px;--r-md:14px;--r-lg:20px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:var(--fb);font-size:1rem;line-height:1.7;color:var(--muted);background:var(--white);overflow-x:hidden}
+img{display:block;max-width:100%}
+a{text-decoration:none}
+button,input,select,textarea{font-family:var(--fb);font-size:inherit}
+
+/* ── SCROLL PROGRESS ── */
+#scroll-bar{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--red),#ff6058);z-index:9999;width:0%;transition:width .08s linear;pointer-events:none}
+
+/* ── TYPE ── */
+.t-hero{font-family:var(--fd);font-size:clamp(2.5rem,5.5vw,4rem);font-weight:800;line-height:1.08;letter-spacing:-.03em;text-wrap:balance}
+.t-h2{font-family:var(--fd);font-size:clamp(1.9rem,3.8vw,2.8rem);font-weight:800;line-height:1.15;letter-spacing:-.02em;text-wrap:balance}
+.t-h3{font-family:var(--fd);font-size:1.15rem;font-weight:700;line-height:1.3;letter-spacing:-.01em}
+.t-lg{font-size:1.08rem;line-height:1.75}
+.t-sm{font-size:0.82rem;line-height:1.5}
+
+/* ── LAYOUT ── */
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+.section{padding:96px 0}
+
+/* ── HEADER ── */
+#site-header{
+  position:fixed;top:0;left:0;right:0;z-index:500;
+  padding:14px 0;
+  background:rgba(11,11,11,.88);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(255,255,255,.07);
+  transition:background .3s,box-shadow .3s;
+}
+#site-header.scrolled{background:rgba(11,11,11,.96);box-shadow:0 4px 20px rgba(0,0,0,.4)}
+.header-inner{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.site-logo{height:36px;width:auto;object-fit:contain}
+.btn-header{display:inline-flex;align-items:center;gap:6px;background:var(--red);color:#fff;font-weight:600;font-size:.82rem;padding:9px 18px;border-radius:var(--r-sm);border:none;cursor:pointer;transition:background .2s,transform .15s;text-decoration:none}
+.btn-header:hover{background:var(--red-dark);transform:translateY(-1px)}
+
+/* ── BUTTONS ── */
+.btn{display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:.95rem;padding:14px 28px;border-radius:var(--r-sm);cursor:pointer;border:2px solid transparent;transition:background .2s,color .2s,transform .15s,border-color .2s,box-shadow .2s;text-decoration:none;line-height:1;position:relative;overflow:hidden}
+.btn::after{content:'';position:absolute;inset:0;background:rgba(255,255,255,0);transition:background .15s}
+.btn:active::after{background:rgba(255,255,255,.1)}
+.btn:hover{transform:translateY(-2px)}
+.btn:active{transform:translateY(0)}
+.btn-red{background:var(--red);color:#fff;box-shadow:0 4px 16px rgba(230,48,37,.3)}
+.btn-red:hover{background:var(--red-dark);box-shadow:0 8px 28px rgba(230,48,37,.4)}
+.btn-ghost{background:transparent;color:rgba(255,255,255,.8);border-color:rgba(255,255,255,.25)}
+.btn-ghost:hover{background:rgba(255,255,255,.08);color:#fff;border-color:rgba(255,255,255,.45)}
+.arr{transition:transform .2s}
+.btn:hover .arr{transform:translateX(4px)}
+
+/* ── EYEBROW ── */
+.eyebrow{display:inline-flex;align-items:center;gap:8px;color:var(--red);font-size:.75rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;margin-bottom:16px}
+.eyebrow::before{content:'';width:18px;height:2px;background:var(--red);border-radius:2px;flex-shrink:0}
+
+/* ── REVEAL ── */
+.rv{opacity:0;transform:translateY(26px);transition:opacity .65s cubic-bezier(.22,1,.36,1),transform .65s cubic-bezier(.22,1,.36,1)}
+.rv.in{opacity:1;transform:translateY(0)}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}
+@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
+
+/* ── SECTION INTRO ── */
+.section-intro{text-align:center;max-width:680px;margin:0 auto 68px}
+.section-intro .t-h2{margin-bottom:16px}
+
+/* ── HERO ── */
+#hero{background:var(--ink);min-height:100vh;display:flex;align-items:center;padding:140px 0 70px;position:relative;overflow:hidden}
+.g1{position:absolute;inset:0;background:radial-gradient(ellipse 700px 600px at 80% -10%,rgba(230,48,37,.18) 0%,transparent 65%);pointer-events:none}
+.g2{position:absolute;inset:0;background:radial-gradient(ellipse 400px 400px at 10% 100%,rgba(230,48,37,.1) 0%,transparent 70%);pointer-events:none}
+
+/* animated grid overlay */
+.hero-grid-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 0%,transparent 100%)}
+
+.hero-grid{display:grid;grid-template-columns:58% 42%;gap:52px;align-items:center;position:relative}
+.hero-badge{display:inline-flex;align-items:center;gap:10px;background:rgba(230,48,37,.12);border:1px solid rgba(230,48,37,.35);color:#ff7a72;font-size:.78rem;font-weight:600;letter-spacing:.08em;padding:7px 14px 7px 10px;border-radius:100px;margin-bottom:28px}
+.badge-dot{width:7px;height:7px;background:var(--red);border-radius:50%;animation:blink 2.4s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
+.hero-h{color:#fff;margin-bottom:10px}
+.hero-h mark{background:none;color:var(--red)}
+.strike{position:relative;color:rgba(255,255,255,.28)}
+.strike::after{content:'';position:absolute;left:0;right:0;top:50%;height:3px;background:var(--red);transform:translateY(-50%);border-radius:2px}
+.hero-p{color:var(--on-dark);max-width:510px;margin-bottom:38px}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:52px}
+.hero-rule{height:1px;background:rgba(255,255,255,.08);margin-bottom:38px}
+.hero-stats{display:flex;gap:44px}
+.stat-n{font-family:var(--fd);font-size:2rem;font-weight:800;color:#fff;line-height:1;margin-bottom:5px}
+.stat-n .a{color:var(--red)}
+.stat-l{font-size:.78rem;color:rgba(255,255,255,.4)}
+
+/* Hero media */
+.hero-media{position:relative}
+.hero-img-frame{border-radius:var(--r-lg);overflow:hidden;position:relative;background:var(--ink-3)}
+.hero-img-frame img{width:100%;height:480px;object-fit:cover;display:block;transition:transform .6s cubic-bezier(.22,1,.36,1)}
+.hero-img-frame:hover img{transform:scale(1.03)}
+.hero-img-frame::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,transparent 60%,rgba(0,0,0,.5))}
+.hcard{position:absolute;background:#fff;border-radius:var(--r-md);padding:16px 20px;box-shadow:0 20px 56px rgba(0,0,0,.3);z-index:2;transition:transform .3s,box-shadow .3s}
+.hcard:hover{transform:translateY(-4px);box-shadow:0 28px 64px rgba(0,0,0,.4)}
+.hcard-b{bottom:20px;left:-30px;display:flex;align-items:center;gap:14px;min-width:236px}
+.hcard-t{top:20px;right:-18px;text-align:right;min-width:180px}
+.hc-ico{width:44px;height:44px;background:var(--red);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0}
+.hc-lbl{font-size:.7rem;color:var(--muted);margin-bottom:2px}
+.hc-val{font-family:var(--fd);font-size:.95rem;font-weight:700;color:var(--ink)}
+.hc-val.r{color:var(--red)}
+.hc-badge{display:inline-block;background:#dcfce7;color:#166534;font-size:.7rem;font-weight:700;padding:3px 8px;border-radius:100px;margin-top:4px}
+
+/* ── TRUST BAR ── */
+#trust{background:var(--ink-3);padding:22px 0;border-top:1px solid rgba(255,255,255,.05);border-bottom:1px solid rgba(255,255,255,.05)}
+.trust-row{display:flex;align-items:center;gap:28px;flex-wrap:wrap}
+.trust-lbl{color:rgba(255,255,255,.3);font-size:.75rem;font-weight:500;white-space:nowrap;flex-shrink:0}
+.trust-div{width:1px;height:22px;background:rgba(255,255,255,.1);flex-shrink:0}
+.trust-logos{display:flex;align-items:center;gap:36px;flex-wrap:wrap}
+.trust-logo{height:28px;width:auto;object-fit:contain;filter:brightness(0) invert(1);opacity:.45;transition:opacity .2s,transform .2s}
+.trust-logo:hover{opacity:.8;transform:scale(1.05)}
+.trust-n{color:rgba(255,255,255,.4);font-family:var(--fd);font-size:.85rem;font-weight:700;letter-spacing:.04em;transition:color .2s}
+.trust-n:hover{color:rgba(255,255,255,.7)}
+
+/* ── PROBLEM ── */
+#problem{background:var(--smoke)}
+.prob-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+.prob-left .t-h2{color:var(--ink);margin-bottom:16px}
+.prob-left .t-lg{margin-bottom:36px}
+.pain-list{display:flex;flex-direction:column;gap:12px}
+.pain{display:flex;align-items:flex-start;gap:14px;background:#fff;border-radius:var(--r-md);padding:17px 20px;border-left:3px solid var(--red);box-shadow:0 2px 12px rgba(0,0,0,.06);transition:transform .25s,box-shadow .25s,border-color .25s;cursor:default}
+.pain:hover{transform:translateX(6px);box-shadow:0 10px 32px rgba(0,0,0,.12);border-color:var(--red-dark)}
+.pain-n{font-family:var(--fd);font-size:.68rem;font-weight:800;color:var(--red);opacity:.55;min-width:20px;padding-top:3px}
+.pain strong{display:block;color:var(--ink);font-size:.9rem;font-weight:600;margin-bottom:2px}
+.pain span{font-size:.8rem}
+.prob-right{position:sticky;top:80px}
+.prob-img-wrap{border-radius:var(--r-lg);overflow:hidden;background:var(--ink-3);position:relative}
+.prob-img-wrap img{width:100%;height:560px;object-fit:cover;display:block;transition:transform .6s cubic-bezier(.22,1,.36,1)}
+.prob-img-wrap:hover img{transform:scale(1.03)}
+.prob-stat{position:absolute;bottom:22px;left:22px;right:22px;background:rgba(0,0,0,.72);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.1);border-radius:var(--r-md);padding:20px 22px}
+.prob-stat .t-sm{color:rgba(255,255,255,.45);letter-spacing:.1em;text-transform:uppercase;margin-bottom:5px}
+.prob-stat-big{font-family:var(--fd);font-size:1.8rem;font-weight:800;color:var(--red);line-height:1;margin-bottom:4px;font-variant-numeric:tabular-nums}
+.prob-stat-sub{font-size:.8rem;color:rgba(255,255,255,.6)}
+
+/* ── SOLUTION ── */
+#solution{background:var(--ink)}
+#solution .t-h2{color:#fff}
+#solution .section-intro .t-lg{color:var(--on-dark)}
+.sol-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-bottom:56px}
+.sol-card{background:var(--ink-3);border:1px solid rgba(255,255,255,.07);border-radius:var(--r-lg);overflow:hidden;transition:transform .3s,border-color .3s,box-shadow .3s}
+.sol-card:hover{transform:translateY(-10px);border-color:rgba(230,48,37,.55);box-shadow:0 24px 60px rgba(230,48,37,.15)}
+.sol-img-wrap{position:relative;overflow:hidden}
+.sol-img{width:100%;height:176px;object-fit:cover;display:block;background:var(--ink-2);transition:transform .5s cubic-bezier(.22,1,.36,1)}
+.sol-card:hover .sol-img{transform:scale(1.06)}
+.sol-body{padding:26px}
+.sol-body .eyebrow{margin-bottom:10px}
+.sol-body .t-h3{color:#fff;margin-bottom:11px}
+.sol-body .t-sm{color:rgba(255,255,255,.5);margin-bottom:18px;font-size:.85rem;line-height:1.6}
+.sol-list{list-style:none;display:flex;flex-direction:column;gap:7px}
+.sol-list li{display:flex;align-items:center;gap:9px;font-size:.83rem;color:rgba(255,255,255,.65);transition:color .2s}
+.sol-list li:hover{color:rgba(255,255,255,.9)}
+.sol-list li::before{content:'';width:5px;height:5px;background:var(--red);border-radius:50%;flex-shrink:0}
+
+/* Compare */
+.compare{display:grid;grid-template-columns:1fr 1fr;border-radius:var(--r-lg);overflow:hidden;border:1px solid rgba(255,255,255,.07)}
+.cmp-side{padding:46px 42px}
+.cmp-bad{background:var(--ink-3)}
+.cmp-good{background:linear-gradient(135deg,#B8241B 0%,var(--red) 55%,#E85048 100%)}
+.cmp-side h3{font-family:var(--fd);font-size:1rem;font-weight:800;margin-bottom:26px;letter-spacing:-.01em}
+.cmp-bad h3{color:rgba(255,255,255,.45)}
+.cmp-good h3{color:#fff}
+.cmp-item{display:flex;align-items:center;gap:11px;padding:9px 0;font-size:.88rem;font-weight:500;transition:transform .2s}
+.cmp-item:hover{transform:translateX(4px)}
+.cmp-bad .cmp-item{color:rgba(255,255,255,.4)}
+.cmp-good .cmp-item{color:rgba(255,255,255,.9)}
+.cmp-ico{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.72rem;flex-shrink:0}
+.cmp-bad .cmp-ico{background:rgba(255,255,255,.07);color:rgba(255,255,255,.3)}
+.cmp-good .cmp-ico{background:rgba(255,255,255,.2);color:#fff}
+
+/* ── CASE STUDIES ── */
+#cases{background:#fff}
+#cases .t-h2{color:var(--ink)}
+.cases-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.case-card{border:1px solid var(--rule);border-radius:var(--r-lg);overflow:hidden;background:#fff;transition:box-shadow .3s,transform .3s;cursor:pointer}
+.case-card:hover{box-shadow:0 24px 60px rgba(0,0,0,.12);transform:translateY(-8px)}
+.case-img-wrap{position:relative;overflow:hidden;height:200px;background:var(--smoke-2)}
+.case-img{width:100%;height:200px;object-fit:cover;display:block;transition:transform .5s cubic-bezier(.22,1,.36,1)}
+.case-card:hover .case-img{transform:scale(1.07)}
+.case-client-logo{position:absolute;bottom:12px;left:12px;height:28px;width:auto;object-fit:contain;background:#fff;border-radius:6px;padding:4px 8px;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+.case-body{padding:26px}
+.case-tag{display:inline-block;background:rgba(230,48,37,.08);color:var(--red);font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;border-radius:100px;margin-bottom:10px}
+.case-body .t-h3{color:var(--ink);margin-bottom:9px}
+.case-body .t-sm{margin-bottom:18px;font-size:.85rem;line-height:1.65}
+.case-metric{background:var(--smoke);border-radius:var(--r-sm);padding:14px 16px;display:flex;flex-direction:column;gap:4px}
+.metric-v{font-family:var(--fd);font-size:1.45rem;font-weight:800;color:var(--red);line-height:1;font-variant-numeric:tabular-nums}
+.metric-d{font-size:.75rem;color:var(--muted)}
+.case-link{display:inline-flex;align-items:center;gap:5px;color:var(--red);font-size:.82rem;font-weight:600;margin-top:14px;opacity:0;transform:translateY(6px);transition:opacity .25s,transform .25s}
+.case-card:hover .case-link{opacity:1;transform:translateY(0)}
+.case-link-arr{transition:transform .2s}
+.case-card:hover .case-link-arr{transform:translateX(3px)}
+
+/* ── HOW ── */
+#how{background:var(--smoke)}
+#how .t-h2{color:var(--ink)}
+.how-grid{display:grid;grid-template-columns:1fr 1fr;gap:68px;align-items:start}
+.how-img-wrap{border-radius:var(--r-lg);overflow:hidden;background:var(--ink-3);position:sticky;top:80px}
+.how-img-wrap img{width:100%;height:520px;object-fit:cover;display:block}
+.how-steps{display:flex;flex-direction:column}
+.how-step{display:flex;gap:22px;padding:28px 0;border-bottom:1px solid var(--rule);cursor:default;transition:background .2s;border-radius:var(--r-sm)}
+.how-step:last-child{border-bottom:none}
+.how-step:hover{background:rgba(230,48,37,.03);padding-left:10px}
+.step-n{font-family:var(--fd);font-size:.68rem;font-weight:800;color:var(--red);min-width:26px;padding-top:4px;letter-spacing:.05em;opacity:.7}
+.step-body .t-h3{color:var(--ink);margin-bottom:7px}
+.step-body .t-sm{font-size:.85rem;line-height:1.65}
+
+/* ── CTA ── */
+#cta{background:linear-gradient(135deg,#A81E16 0%,var(--red) 50%,#e84840 100%);position:relative;overflow:hidden}
+#cta::before{content:'';position:absolute;width:600px;height:600px;border-radius:50%;background:rgba(255,255,255,.04);top:-200px;right:-150px;pointer-events:none}
+#cta::after{content:'';position:absolute;width:350px;height:350px;border-radius:50%;background:rgba(0,0,0,.07);bottom:-120px;left:5%;pointer-events:none}
+.cta-grid{display:grid;grid-template-columns:1fr 1fr;gap:76px;align-items:center;position:relative}
+.cta-left .eyebrow{color:rgba(255,255,255,.7)}
+.cta-left .eyebrow::before{background:rgba(255,255,255,.7)}
+.cta-left .t-h2{color:#fff;margin-bottom:16px}
+.cta-left .t-lg{color:rgba(255,255,255,.8);margin-bottom:34px}
+.cta-perks{display:flex;flex-direction:column;gap:13px}
+.perk{display:flex;align-items:center;gap:13px;color:rgba(255,255,255,.9);font-size:.88rem;font-weight:500;transition:color .2s}
+.perk:hover{color:#fff}
+.perk-ck{width:22px;height:22px;background:rgba(255,255,255,.18);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.68rem;flex-shrink:0;color:#fff}
+
+/* Form */
+.form-wrap{background:#fff;border-radius:var(--r-lg);padding:42px 38px;box-shadow:0 32px 80px rgba(0,0,0,.2)}
+.form-title{font-family:var(--fd);font-size:1.35rem;font-weight:800;color:var(--ink);margin-bottom:5px}
+.form-sub{font-size:.82rem;color:var(--muted);margin-bottom:26px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.fg{margin-bottom:14px}
+.fg label{display:block;font-size:.75rem;font-weight:600;color:var(--ink);margin-bottom:4px}
+.fg input,.fg select{width:100%;padding:11px 13px;border:1.5px solid var(--rule);border-radius:var(--r-sm);font-size:.88rem;color:var(--ink);background:#fff;outline:none;transition:border-color .2s,box-shadow .2s}
+.fg input::placeholder{color:var(--muted);opacity:.6}
+.fg input:focus,.fg select:focus{border-color:var(--red);box-shadow:0 0 0 3px rgba(230,48,37,.1)}
+.form-btn{width:100%;background:var(--red);color:#fff;border:none;padding:15px;border-radius:var(--r-sm);font-size:.95rem;font-weight:700;font-family:var(--fd);cursor:pointer;transition:background .2s,transform .15s,box-shadow .2s;margin-top:4px;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 4px 16px rgba(230,48,37,.3)}
+.form-btn:hover{background:var(--red-dark);transform:translateY(-2px);box-shadow:0 8px 28px rgba(230,48,37,.4)}
+.form-prv{text-align:center;font-size:.72rem;color:var(--muted);margin-top:10px}
+
+/* ── FLOATING CTA ── */
+#float-cta{position:fixed;bottom:28px;right:28px;z-index:400;opacity:0;transform:translateY(16px) scale(.95);transition:opacity .35s,transform .35s;pointer-events:none}
+#float-cta.show{opacity:1;transform:translateY(0) scale(1);pointer-events:auto}
+.float-btn{display:flex;align-items:center;gap:8px;background:var(--red);color:#fff;font-weight:700;font-size:.85rem;padding:12px 20px;border-radius:100px;box-shadow:0 6px 24px rgba(230,48,37,.45);cursor:pointer;border:none;text-decoration:none;animation:floatPulse 3s ease-in-out infinite}
+@keyframes floatPulse{0%,100%{box-shadow:0 6px 24px rgba(230,48,37,.45)}50%{box-shadow:0 6px 36px rgba(230,48,37,.65)}}
+.float-btn:hover{background:var(--red-dark);animation:none;box-shadow:0 8px 32px rgba(230,48,37,.6)}
+
+/* ── FOOTER ── */
+footer{background:var(--ink);padding:36px 0;border-top:1px solid rgba(255,255,255,.06)}
+.footer-row{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.footer-logo-img{height:32px;width:auto;object-fit:contain;opacity:.8;transition:opacity .2s}
+.footer-logo-img:hover{opacity:1}
+.footer-copy{font-size:.78rem;color:rgba(255,255,255,.3)}
+.footer-links{display:flex;gap:22px}
+.footer-links a{font-size:.78rem;color:rgba(255,255,255,.38);transition:color .2s}
+.footer-links a:hover{color:rgba(255,255,255,.75)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1024px){
+  .hero-grid{grid-template-columns:1fr}
+  .hero-media{display:none}
+  .prob-grid,.how-grid{grid-template-columns:1fr}
+  .prob-right{position:static}
+  .how-img-wrap{position:static}
+  .sol-cards{grid-template-columns:1fr 1fr}
+  .cases-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:768px){
+  .section{padding:68px 0}
+  #hero{padding:120px 0 60px}
+  .sol-cards,.cases-grid{grid-template-columns:1fr}
+  .compare,.cta-grid{grid-template-columns:1fr}
+  .form-row{grid-template-columns:1fr}
+  .form-wrap{padding:30px 22px}
+  .hero-stats{gap:26px;flex-wrap:wrap}
+  .footer-row{flex-direction:column;text-align:center}
+  .footer-links{justify-content:center}
+  #float-cta{bottom:20px;right:20px}
+}
+@media(max-width:480px){
+  .hero-actions{flex-direction:column}
+  .hero-actions .btn{width:100%;justify-content:center}
+  .trust-logos{gap:20px}
+  .trust-logo{height:22px}
+}
+</style>
+</head>
+<body>
+
+<!-- SCROLL PROGRESS -->
+<div id="scroll-bar"></div>
+
+<!-- HEADER -->
+<header id="site-header">
+  <div class="wrap header-inner">
+    <img src="./appzoro-logo.png" class="site-logo" alt="AppZoro">
+    <a href="#cta" class="btn-header">Book Free Assessment <span>→</span></a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="g1"></div><div class="g2"></div>
+  <div class="hero-grid-bg"></div>
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-badge"><div class="badge-dot"></div>Atlanta's Digital Transformation Partner</div>
+        <h1 class="t-hero hero-h">
+          Stop Running on<br>
+          <span class="strike">Manual Processes</span><br>
+          Start <mark>Scaling Smart</mark>
+        </h1>
+        <p class="t-lg hero-p">We help Atlanta businesses replace spreadsheets, disconnected systems, and repetitive manual work with custom software, AI automation, and intelligent digital solutions — built for how you actually operate.</p>
+        <div class="hero-actions">
+          <a href="#cta" class="btn btn-red">Book Free Strategy Call <span class="arr">→</span></a>
+          <a href="#solution" class="btn btn-ghost">See Our Solutions</a>
+        </div>
+        <div class="hero-rule"></div>
+        <div class="hero-stats">
+          <div><div class="stat-n"><span class="count" data-target="10">10</span><span class="a">+</span></div><div class="stat-l">Years in Atlanta</div></div>
+          <div><div class="stat-n"><span class="count" data-target="6">6</span><span class="a">M+</span></div><div class="stat-l">Clients Served</div></div>
+          <div><div class="stat-n"><span class="count" data-target="98">98</span><span class="a">%</span></div><div class="stat-l">Satisfaction Rate</div></div>
+        </div>
+      </div>
+      <div class="hero-media">
+        <div class="hero-img-frame">
+          <img src="https://images.unsplash.com/photo-1573496799652-408c2ac9fe98?w=900&q=80&fit=crop" alt="AppZoro team" onerror="this.parentElement.style.background='#1E1E1E'">
+        </div>
+        <div class="hcard hcard-b">
+          <div class="hc-ico">⚡</div>
+          <div><div class="hc-lbl">Avg. time reduction</div><div class="hc-val r">2,500 hrs → 15 min</div></div>
+        </div>
+        <div class="hcard hcard-t">
+          <div class="hc-lbl">Client satisfaction</div>
+          <div class="hc-val">98% happy</div>
+          <div class="hc-badge">★ Rated #1 in Atlanta</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div id="trust">
+  <div class="wrap">
+    <div class="trust-row">
+      <span class="trust-lbl">Trusted by growing companies</span>
+      <div class="trust-div"></div>
+      <div class="trust-logos">
+        <img class="trust-logo" src="https://admin.appzoro.com/uploads/Freedom_logo_e514f9a485.png" alt="Freedom Rideshare" onerror="this.style.display='none'">
+        <img class="trust-logo" src="https://admin.appzoro.com/uploads/JI_logo_dbdfdbf9be.png" alt="Judicial Innovation" onerror="this.style.display='none'">
+        <img class="trust-logo" src="https://admin.appzoro.com/uploads/spaspace_logo_445cefd2a6.png" alt="SpaSpace" onerror="this.style.display='none'">
+        <span class="trust-n">Atlanta Health</span>
+        <span class="trust-n">PinPoint Logistics</span>
+        <span class="trust-n">CoreData Systems</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PROBLEM -->
+<section id="problem" class="section">
+  <div class="wrap">
+    <div class="prob-grid">
+      <div class="prob-left rv">
+        <div class="eyebrow">The Problem</div>
+        <h2 class="t-h2">Manual Processes Are Quietly Killing Your Growth</h2>
+        <p class="t-lg">Every hour your team spends on spreadsheets and repetitive work is an hour your competitors spend on strategy.</p>
+        <div class="pain-list">
+          <div class="pain rv d1"><span class="pain-n">01</span><div><strong>Teams buried in spreadsheets</strong><span>Hours wasted updating files that are always out of date and full of errors.</span></div></div>
+          <div class="pain rv d2"><span class="pain-n">02</span><div><strong>Data scattered across 5+ tools</strong><span>Customer info, orders, and reports live in systems that never talk to each other.</span></div></div>
+          <div class="pain rv d3"><span class="pain-n">03</span><div><strong>Repetitive manual tasks daily</strong><span>Your team does the same work every day that a smart system could handle in seconds.</span></div></div>
+          <div class="pain rv"><span class="pain-n">04</span><div><strong>No real-time visibility</strong><span>You see what happened last week — not what's happening right now in your business.</span></div></div>
+          <div class="pain rv"><span class="pain-n">05</span><div><strong>Processes break when you scale</strong><span>More clients = more chaos. Your current systems weren't built to grow with you.</span></div></div>
+          <div class="pain rv"><span class="pain-n">06</span><div><strong>Missed opportunities every day</strong><span>Competitors with modern systems move faster, respond quicker, and win more deals.</span></div></div>
+        </div>
+      </div>
+      <div class="prob-right rv d2">
+        <div class="prob-img-wrap">
+          <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80&fit=crop" alt="Manual data overload" onerror="this.parentElement.style.background='#1E1E1E'">
+          <div class="prob-stat">
+            <div class="t-sm">Industry Research</div>
+            <div class="prob-stat-big">$22,700</div>
+            <div class="prob-stat-sub">Average annual cost of manual data entry errors per employee</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOLUTION -->
+<section id="solution" class="section">
+  <div class="wrap">
+    <div class="section-intro rv">
+      <div class="eyebrow">Our Solutions</div>
+      <h2 class="t-h2">We Build the Systems That Set You Free</h2>
+      <p class="t-lg" style="color:var(--on-dark)">Not off-the-shelf software with workarounds. Custom systems built exactly for how your business operates.</p>
+    </div>
+    <div class="sol-cards">
+      <div class="sol-card rv">
+        <div class="sol-img-wrap"><img class="sol-img" src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=700&q=80&fit=crop" alt="Custom software" onerror="this.parentElement.style.background='#1E1E1E'"></div>
+        <div class="sol-body">
+          <div class="eyebrow">Build</div>
+          <h3 class="t-h3">Custom Software Development</h3>
+          <p class="t-sm">Systems built for your exact workflows — no generic tools, no compromises, no workarounds.</p>
+          <ul class="sol-list"><li>Web &amp; Mobile Applications</li><li>ERP, CRM &amp; Data Platforms</li><li>Real-Time Dashboards</li><li>API Integrations &amp; Portals</li></ul>
+        </div>
+      </div>
+      <div class="sol-card rv d1">
+        <div class="sol-img-wrap"><img class="sol-img" src="https://images.unsplash.com/photo-1518186285589-2f7649de83e0?w=700&q=80&fit=crop" alt="Automation" onerror="this.parentElement.style.background='#1E1E1E'"></div>
+        <div class="sol-body">
+          <div class="eyebrow">Automate</div>
+          <h3 class="t-h3">Business Process Automation</h3>
+          <p class="t-sm">Eliminate tasks eating your team's time. Let software handle the routine so people handle the important.</p>
+          <ul class="sol-list"><li>Workflow &amp; Approval Automation</li><li>Document Processing</li><li>Reporting &amp; Data Sync</li><li>Communication Automation</li></ul>
+        </div>
+      </div>
+      <div class="sol-card rv d2">
+        <div class="sol-img-wrap"><img class="sol-img" src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=700&q=80&fit=crop" alt="AI solutions" onerror="this.parentElement.style.background='#1E1E1E'"></div>
+        <div class="sol-body">
+          <div class="eyebrow">Intelligize</div>
+          <h3 class="t-h3">AI-Powered Solutions</h3>
+          <p class="t-sm">Use AI to make better decisions, faster — without needing a data science team on staff.</p>
+          <ul class="sol-list"><li>AI Chatbots &amp; Virtual Agents</li><li>Predictive Analytics</li><li>Intelligent Document Processing</li><li>Generative AI Integration</li></ul>
+        </div>
+      </div>
+    </div>
+    <div class="compare rv">
+      <div class="cmp-side cmp-bad">
+        <h3>Without AppZoro</h3>
+        <div class="cmp-item"><div class="cmp-ico">✕</div>Excel sheets &amp; manual tracking</div>
+        <div class="cmp-item"><div class="cmp-ico">✕</div>Endless email chains</div>
+        <div class="cmp-item"><div class="cmp-ico">✕</div>Manual reporting (hours of work)</div>
+        <div class="cmp-item"><div class="cmp-ico">✕</div>Data entry errors &amp; rework</div>
+        <div class="cmp-item"><div class="cmp-ico">✕</div>Disconnected, siloed systems</div>
+        <div class="cmp-item"><div class="cmp-ico">✕</div>Zero visibility into operations</div>
+      </div>
+      <div class="cmp-side cmp-good">
+        <h3>With AppZoro</h3>
+        <div class="cmp-item"><div class="cmp-ico">✓</div>Automated workflows &amp; approvals</div>
+        <div class="cmp-item"><div class="cmp-ico">✓</div>Real-time dashboards</div>
+        <div class="cmp-item"><div class="cmp-ico">✓</div>AI-generated reports in seconds</div>
+        <div class="cmp-item"><div class="cmp-ico">✓</div>Accurate, centralized data</div>
+        <div class="cmp-item"><div class="cmp-ico">✓</div>All tools integrated seamlessly</div>
+        <div class="cmp-item"><div class="cmp-ico">✓</div>Complete operational visibility</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CASE STUDIES -->
+<section id="cases" class="section" style="background:#fff">
+  <div class="wrap">
+    <div class="section-intro rv" style="color:var(--muted)">
+      <div class="eyebrow">Proof</div>
+      <h2 class="t-h2" style="color:var(--ink)">Real Clients. Real Results.</h2>
+      <p class="t-lg">Three AppZoro-built platforms already transforming industries — from rideshare to law to wellness.</p>
+    </div>
+    <div class="cases-grid">
+
+      <!-- Freedom Rideshare -->
+      <div class="case-card rv">
+        <div class="case-img-wrap">
+          <img class="case-img" src="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=700&q=80&fit=crop" alt="Freedom Rideshare rental fleet" onerror="this.parentElement.style.background='#EFEDE9'">
+          <img class="case-client-logo" src="https://admin.appzoro.com/uploads/Freedom_logo_e514f9a485.png" alt="Freedom Rideshare" onerror="this.style.display='none'">
+        </div>
+        <div class="case-body">
+          <span class="case-tag">Transportation</span>
+          <h3 class="t-h3">Freedom Rideshare</h3>
+          <p class="t-sm">AppZoro built a full-featured rental fleet management platform for rideshare drivers in Houston, TX — flexible two-day rentals extensible daily, driver onboarding, and real-time vehicle tracking across Android, iOS &amp; Web.</p>
+          <div class="case-metric"><span class="metric-v">3,000+</span><span class="metric-d">Active drivers on the platform across Houston</span></div>
+          <a href="https://freedomrideshare.com" target="_blank" class="case-link">View Project <span class="case-link-arr">→</span></a>
+        </div>
+      </div>
+
+      <!-- Judicial Innovation -->
+      <div class="case-card rv d1">
+        <div class="case-img-wrap">
+          <img class="case-img" src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=700&q=80&fit=crop" alt="Judicial Innovation dispute resolution" onerror="this.parentElement.style.background='#EFEDE9'">
+          <img class="case-client-logo" src="https://admin.appzoro.com/uploads/JI_logo_dbdfdbf9be.png" alt="Judicial Innovation" onerror="this.style.display='none'">
+        </div>
+        <div class="case-body">
+          <span class="case-tag">Law &amp; Justice</span>
+          <h3 class="t-h3">Judicial Innovation</h3>
+          <p class="t-sm">AppZoro engineered an Online Dispute Resolution platform enabling remote access to federal and Supreme Court cases — empowering individuals unable to physically attend court sessions to participate in legal proceedings digitally.</p>
+          <div class="case-metric"><span class="metric-v">100% Remote</span><span class="metric-d">Federal &amp; Supreme Court cases — no in-person attendance needed</span></div>
+          <a href="https://judicialinnovation.com" target="_blank" class="case-link">View Project <span class="case-link-arr">→</span></a>
+        </div>
+      </div>
+
+      <!-- SpaSpace -->
+      <div class="case-card rv d2">
+        <div class="case-img-wrap">
+          <img class="case-img" src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=700&q=80&fit=crop" alt="SpaSpace on-demand wellness booking" onerror="this.parentElement.style.background='#EFEDE9'">
+          <img class="case-client-logo" src="https://admin.appzoro.com/uploads/spaspace_logo_445cefd2a6.png" alt="SpaSpace" onerror="this.style.display='none'">
+        </div>
+        <div class="case-body">
+          <span class="case-tag">Wellness</span>
+          <h3 class="t-h3">SpaSpace</h3>
+          <p class="t-sm">AppZoro built an on-demand spa booking platform delivering personalized wellness experiences. Customers discover, book, and pay for spa services in real-time — a seamless digital experience for the self-care economy.</p>
+          <div class="case-metric"><span class="metric-v">500+</span><span class="metric-d">Spa providers live on the booking platform</span></div>
+          <a href="https://app.spaspace.com" target="_blank" class="case-link">View Project <span class="case-link-arr">→</span></a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- HOW WE HELP -->
+<section id="how" class="section" style="background:var(--smoke)">
+  <div class="wrap">
+    <div class="section-intro rv">
+      <div class="eyebrow">Our Process</div>
+      <h2 class="t-h2" style="color:var(--ink)">How AppZoro Transforms Your Business</h2>
+      <p class="t-lg">A proven 5-step process. From chaos to clarity — in weeks, not months.</p>
+    </div>
+    <div class="how-grid">
+      <div class="how-img-wrap rv">
+        <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=800&q=80&fit=crop" alt="AppZoro strategy session" onerror="this.parentElement.style.background='#1E1E1E'">
+      </div>
+      <div class="how-steps rv d1">
+        <div class="how-step"><span class="step-n">01</span><div class="step-body"><h3 class="t-h3">Free Digital Assessment</h3><p class="t-sm">We audit your operations, map every process, and identify your highest-ROI automation opportunities — in a single 45-minute session.</p></div></div>
+        <div class="how-step"><span class="step-n">02</span><div class="step-body"><h3 class="t-h3">Custom Transformation Roadmap</h3><p class="t-sm">Our team designs a phased roadmap with clear milestones, cost-savings projections, and a build sequence that minimizes disruption.</p></div></div>
+        <div class="how-step"><span class="step-n">03</span><div class="step-body"><h3 class="t-h3">Build &amp; Integrate</h3><p class="t-sm">We build your solution, integrate it with your existing tools, and run parallel testing so your operations never skip a beat.</p></div></div>
+        <div class="how-step"><span class="step-n">04</span><div class="step-body"><h3 class="t-h3">Launch &amp; Train Your Team</h3><p class="t-sm">Hands-on training, documentation, and onboarding support so your team is confident and effective from day one.</p></div></div>
+        <div class="how-step"><span class="step-n">05</span><div class="step-body"><h3 class="t-h3">Optimize &amp; Scale Together</h3><p class="t-sm">Ongoing support and quarterly reviews to optimize performance and add capabilities as your business grows.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta" class="section">
+  <div class="wrap">
+    <div class="cta-grid">
+      <div class="cta-left rv">
+        <div class="eyebrow">Limited Spots Available</div>
+        <h2 class="t-h2">Get Your Free Digital Transformation Assessment</h2>
+        <p class="t-lg">Book a free 45-minute strategy session. We'll identify your biggest automation opportunities and give you a custom roadmap — no pitch, no pressure, no obligation.</p>
+        <div class="cta-perks">
+          <div class="perk"><div class="perk-ck">✓</div>Full operations audit (valued at $2,500)</div>
+          <div class="perk"><div class="perk-ck">✓</div>Custom automation opportunity map</div>
+          <div class="perk"><div class="perk-ck">✓</div>ROI projection for your top 3 use cases</div>
+          <div class="perk"><div class="perk-ck">✓</div>No sales pressure — actionable insights only</div>
+          <div class="perk"><div class="perk-ck">✓</div>100% free for qualifying businesses</div>
+        </div>
+      </div>
+      <div class="rv d2">
+        <div class="form-wrap">
+          <div class="form-title">Claim Your Free Assessment</div>
+          <p class="form-sub">Fill out the form — we'll reach out within 24 hours to schedule.</p>
+          <form id="af" onsubmit="handleSubmit(event)">
+            <div class="form-row">
+              <div class="fg"><label>First Name *</label><input type="text" placeholder="John" required></div>
+              <div class="fg"><label>Last Name *</label><input type="text" placeholder="Smith" required></div>
+            </div>
+            <div class="fg"><label>Business Email *</label><input type="email" placeholder="john@company.com" required></div>
+            <div class="fg"><label>Phone Number *</label><input type="tel" placeholder="+1 (555) 000-0000" required></div>
+            <div class="fg"><label>Company Name *</label><input type="text" placeholder="Your Company, Inc." required></div>
+            <div class="form-row">
+              <div class="fg"><label>Company Size</label>
+                <select><option value="">Team size…</option><option>1–10</option><option>11–50</option><option>51–200</option><option>200+</option></select>
+              </div>
+              <div class="fg"><label>Biggest Challenge</label>
+                <select><option value="">Top challenge…</option><option>Manual processes</option><option>Disconnected systems</option><option>Need custom software</option><option>Want AI solutions</option><option>Scaling operations</option></select>
+              </div>
+            </div>
+            <button type="submit" class="form-btn" id="fbtn"><span id="ftxt">Claim My Free Assessment</span><span id="farr">→</span></button>
+          </form>
+          <p class="form-prv">🔒 100% private. No spam, ever.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="footer-row">
+      <img src="./appzoro-logo.png" alt="AppZoro" class="footer-logo-img">
+      <p class="footer-copy">© 2026 AppZoro Technologies, Inc. · Atlanta, GA</p>
+      <div class="footer-links">
+        <a href="mailto:info@appzoro.com">info@appzoro.com</a>
+        <a href="#">Privacy Policy</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- FLOATING CTA -->
+<div id="float-cta">
+  <a href="#cta" class="float-btn">📞 Book Free Call →</a>
+</div>
+
+<script>
+/* ── SCROLL PROGRESS ── */
+const bar = document.getElementById('scroll-bar');
+const header = document.getElementById('site-header');
+const floatCta = document.getElementById('float-cta');
+let heroHeight = 0;
+
+function onScroll() {
+  const scrolled = window.scrollY;
+  const total = document.body.scrollHeight - window.innerHeight;
+  bar.style.width = (scrolled / total * 100) + '%';
+  header.classList.toggle('scrolled', scrolled > 40);
+  floatCta.classList.toggle('show', scrolled > heroHeight * 0.6);
+}
+
+window.addEventListener('scroll', onScroll, { passive: true });
+
+/* ── REVEAL ── */
+const revObs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+}, { threshold: 0.1, rootMargin: '0px 0px -32px 0px' });
+document.querySelectorAll('.rv').forEach(el => revObs.observe(el));
+
+/* ── COUNTER ANIMATION ── */
+function animateCount(el, target, duration) {
+  let start = null;
+  const step = ts => {
+    if (!start) start = ts;
+    const p = Math.min((ts - start) / duration, 1);
+    const eased = 1 - Math.pow(1 - p, 4);
+    el.textContent = Math.round(eased * target);
+    if (p < 1) requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step);
+}
+
+const counterObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    const el = e.target;
+    const target = parseInt(el.dataset.target, 10);
+    animateCount(el, target, 1800);
+    counterObs.unobserve(el);
+  });
+}, { threshold: 0.5 });
+
+document.querySelectorAll('.count[data-target]').forEach(el => counterObs.observe(el));
+
+/* ── HERO HEIGHT ── */
+function setHeroHeight() {
+  const hero = document.getElementById('hero');
+  if (hero) heroHeight = hero.offsetHeight;
+}
+setHeroHeight();
+window.addEventListener('resize', setHeroHeight);
+
+/* ── PARALLAX GLOW ── */
+const g1 = document.querySelector('.g1');
+const g2 = document.querySelector('.g2');
+window.addEventListener('scroll', () => {
+  const y = window.scrollY;
+  if (g1) g1.style.transform = `translateY(${y * 0.15}px)`;
+  if (g2) g2.style.transform = `translateY(${y * -0.1}px)`;
+}, { passive: true });
+
+/* ── FORM SUBMIT ── */
+function handleSubmit(e) {
+  e.preventDefault();
+  const btn = document.getElementById('fbtn');
+  const txt = document.getElementById('ftxt');
+  const arr = document.getElementById('farr');
+  btn.style.background = '#16a34a';
+  btn.style.boxShadow = '0 4px 16px rgba(22,163,74,.35)';
+  btn.disabled = true;
+  txt.textContent = 'Request Submitted! ';
+  arr.textContent = '✓';
+  setTimeout(() => {
+    btn.style.background = '';
+    btn.style.boxShadow = '';
+    btn.disabled = false;
+    txt.textContent = 'Claim My Free Assessment ';
+    arr.textContent = '→';
+    e.target.reset();
+  }, 5000);
+}
+
+/* ── SMOOTH SCROLL ── */
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const t = document.querySelector(a.getAttribute('href'));
+    if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+  });
+});
+
+/* ── RIPPLE ON FORM BUTTON ── */
+document.querySelector('.form-btn').addEventListener('click', function(e) {
+  const r = document.createElement('span');
+  const rect = this.getBoundingClientRect();
+  const size = Math.max(rect.width, rect.height);
+  r.style.cssText = `position:absolute;width:${size}px;height:${size}px;left:${e.clientX-rect.left-size/2}px;top:${e.clientY-rect.top-size/2}px;background:rgba(255,255,255,.2);border-radius:50%;transform:scale(0);animation:ripple .5s linear;pointer-events:none`;
+  this.style.position = 'relative';
+  this.style.overflow = 'hidden';
+  this.appendChild(r);
+  setTimeout(() => r.remove(), 600);
+});
+
+/* add ripple keyframe */
+const style = document.createElement('style');
+style.textContent = '@keyframes ripple{to{transform:scale(2.5);opacity:0}}';
+document.head.appendChild(style);
+</script>
+</body>
+</html>
