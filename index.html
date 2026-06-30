@@ -94,12 +94,11 @@ button,input,select,textarea{font-family:var(--fb);font-size:inherit}
 .marquee-track{display:flex;align-items:center;gap:64px;animation:scrollLeft 38s linear infinite;width:max-content}
 .marquee-track:hover{animation-play-state:paused}
 @keyframes scrollLeft{0%{transform:translateX(0)}100%{transform:translateX(-33.3333%)}}
-.m-logo{display:flex;align-items:center;justify-content:center;height:44px;flex-shrink:0;padding:7px 18px;background:rgba(255,255,255,.09);border-radius:10px;transition:background .25s}
-.m-logo:hover{background:rgba(255,255,255,.16)}
-.m-logo img{height:28px;width:auto;max-width:120px;object-fit:contain;opacity:.95;transition:opacity .25s}
-.m-logo img:hover{opacity:1}
-.m-name{font-family:var(--fd);font-size:.82rem;font-weight:700;letter-spacing:.07em;color:rgba(255,255,255,.75);white-space:nowrap;transition:color .25s}
-.m-logo:hover .m-name{color:#fff}
+.m-logo{display:flex;align-items:center;justify-content:center;height:44px;flex-shrink:0;padding:7px 20px;background:rgba(255,255,255,.93);border-radius:10px;transition:background .25s,box-shadow .25s;box-shadow:0 1px 6px rgba(0,0,0,.18)}
+.m-logo:hover{background:#fff;box-shadow:0 2px 12px rgba(0,0,0,.28)}
+.m-logo img{height:28px;width:auto;max-width:120px;object-fit:contain;opacity:1}
+.m-name{font-family:var(--fd);font-size:.78rem;font-weight:700;letter-spacing:.06em;color:#1a1a1a;white-space:nowrap}
+.m-sep{display:none}
 .m-sep{width:1px;height:22px;background:rgba(255,255,255,.1);flex-shrink:0}
 
 /* animated grid overlay */
@@ -225,8 +224,8 @@ button,input,select,textarea{font-family:var(--fb);font-size:inherit}
 .cs-dot{height:8px;width:8px;border-radius:4px;background:rgba(255,255,255,.18);cursor:pointer;border:none;padding:0;transition:background .25s,width .3s cubic-bezier(.22,1,.36,1)}
 .cs-dot.active{background:var(--red);width:28px}
 .cs-client-bar{display:flex;align-items:center;justify-content:center;min-height:52px;margin-top:32px;padding-top:28px;border-top:1px solid rgba(255,255,255,.07);transition:opacity .2s ease}
-.cs-client-active-logo{height:28px;width:auto;max-width:160px;object-fit:contain;opacity:.85;display:block}
-.cs-client-active-name{font-family:var(--fd);font-size:1rem;font-weight:700;letter-spacing:.05em;color:rgba(255,255,255,.35)}
+.cs-client-active-logo{height:28px;width:auto;max-width:160px;object-fit:contain;opacity:1;display:block;background:rgba(255,255,255,.93);border-radius:8px;padding:6px 16px;box-sizing:content-box;box-shadow:0 1px 6px rgba(0,0,0,.18)}
+.cs-client-active-name{font-family:var(--fd);font-size:.85rem;font-weight:700;letter-spacing:.06em;color:#1a1a1a;background:rgba(255,255,255,.93);border-radius:8px;padding:8px 18px;box-shadow:0 1px 6px rgba(0,0,0,.18)}
 
 /* ── WHY CLIENTS ── */
 #why{background:var(--ink)}
