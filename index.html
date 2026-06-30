@@ -131,11 +131,11 @@ button,input,select,textarea{font-family:var(--fb);font-size:inherit}
 .trust-n:hover{color:rgba(255,255,255,.7)}
 
 /* ── PROBLEM ── */
-#problem{background:var(--smoke)}
+#problem{background:var(--ink-2)}
 .pain-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.pain-card{background:var(--ink);border-radius:var(--r-lg);padding:30px 26px;position:relative;overflow:hidden;transition:transform .3s cubic-bezier(.22,1,.36,1),box-shadow .3s;cursor:default}
-.pain-card::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 200px 200px at 100% 0%,rgba(230,48,37,.16) 0%,transparent 60%);pointer-events:none}
-.pain-card:hover{transform:translateY(-8px);box-shadow:0 28px 64px rgba(0,0,0,.25)}
+.pain-card{background:var(--ink-3);border:1px solid rgba(255,255,255,.07);border-radius:var(--r-lg);padding:30px 26px;position:relative;overflow:hidden;transition:transform .3s cubic-bezier(.22,1,.36,1),box-shadow .3s,border-color .3s;cursor:default}
+.pain-card::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 200px 200px at 100% 0%,rgba(230,48,37,.14) 0%,transparent 60%);pointer-events:none}
+.pain-card:hover{transform:translateY(-8px);box-shadow:0 28px 64px rgba(0,0,0,.3);border-color:rgba(230,48,37,.35)}
 .pain-card-n{font-family:var(--fd);font-size:.65rem;font-weight:800;color:var(--red);letter-spacing:.12em;margin-bottom:16px;opacity:.7}
 .pain-card-ico{font-size:2rem;margin-bottom:12px;display:block;line-height:1}
 .pain-card-title{font-family:var(--fd);font-size:.97rem;font-weight:700;color:#fff;margin-bottom:10px;line-height:1.3}
@@ -371,8 +371,8 @@ footer{background:var(--ink);padding:36px 0;border-top:1px solid rgba(255,255,25
   <div class="wrap">
     <div class="section-intro rv">
       <div class="eyebrow">The Problem</div>
-      <h2 class="t-h2" style="color:var(--ink)">Every Day You Wait Costs You More Than You Think</h2>
-      <p class="t-lg">The companies pulling ahead aren't necessarily bigger or smarter. They simply replaced outdated processes with software, automation, and AI before inefficiencies started costing them time, money, and growth.</p>
+      <h2 class="t-h2" style="color:#fff">Every Day You Wait Costs You More Than You Think</h2>
+      <p class="t-lg" style="color:var(--on-dark)">The companies pulling ahead aren't necessarily bigger or smarter. They simply replaced outdated processes with software, automation, and AI before inefficiencies started costing them time, money, and growth.</p>
     </div>
     <div class="pain-grid">
       <div class="pain-card rv">
