@@ -80,9 +80,23 @@ button,input,select,textarea{font-family:var(--fb);font-size:inherit}
 .section-intro .t-h2{margin-bottom:16px}
 
 /* ── HERO ── */
-#hero{background:var(--ink);min-height:100vh;display:flex;align-items:center;padding:140px 0 70px;position:relative;overflow:hidden}
+#hero{background:var(--ink);min-height:100vh;display:flex;align-items:center;padding:140px 0 160px;position:relative;overflow:hidden}
 .g1{position:absolute;inset:0;background:radial-gradient(ellipse 700px 600px at 80% -10%,rgba(230,48,37,.18) 0%,transparent 65%);pointer-events:none}
 .g2{position:absolute;inset:0;background:radial-gradient(ellipse 400px 400px at 10% 100%,rgba(230,48,37,.1) 0%,transparent 70%);pointer-events:none}
+.g3{position:absolute;inset:0;background:radial-gradient(ellipse 900px 360px at 50% 55%,rgba(230,48,37,.06) 0%,transparent 65%);pointer-events:none}
+
+/* ── HERO BRANDS MARQUEE ── */
+.hero-brands{position:absolute;bottom:0;left:0;right:0;padding:28px 0 34px;background:linear-gradient(to top,rgba(11,11,11,.55) 0%,transparent 100%);z-index:2}
+.hero-brands-lbl{font-size:.65rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.2);text-align:center;margin-bottom:16px}
+.marquee-wrap{overflow:hidden;-webkit-mask-image:linear-gradient(to right,transparent 0%,black 10%,black 90%,transparent 100%);mask-image:linear-gradient(to right,transparent 0%,black 10%,black 90%,transparent 100%)}
+.marquee-track{display:flex;align-items:center;gap:56px;animation:scrollLeft 34s linear infinite;width:max-content;padding:0 28px}
+.marquee-track:hover{animation-play-state:paused}
+@keyframes scrollLeft{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.m-logo{display:flex;align-items:center;justify-content:center;height:38px;flex-shrink:0}
+.m-logo img{height:26px;width:auto;max-width:120px;object-fit:contain;filter:brightness(0) invert(1);opacity:.36;transition:opacity .25s}
+.m-logo img:hover{opacity:.7}
+.m-name{font-family:var(--fd);font-size:.8rem;font-weight:700;letter-spacing:.06em;color:rgba(255,255,255,.24);white-space:nowrap;transition:color .25s}
+.m-logo:hover .m-name{color:rgba(255,255,255,.56)}
 
 /* animated grid overlay */
 .hero-grid-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 0%,transparent 100%)}
@@ -328,13 +342,13 @@ footer{background:var(--ink);padding:36px 0;border-top:1px solid rgba(255,255,25
 <header id="site-header">
   <div class="wrap header-inner">
     <img src="./appzoro-logo.png" class="site-logo" alt="AppZoro">
-    <a href="#cta" class="btn-header">Free Strategy Call <span>→</span></a>
+    <a href="#pre-footer" class="btn-header">Free Strategy Call <span>→</span></a>
   </div>
 </header>
 
 <!-- HERO -->
 <section id="hero">
-  <div class="g1"></div><div class="g2"></div>
+  <div class="g1"></div><div class="g2"></div><div class="g3"></div>
   <div class="hero-grid-bg"></div>
   <div class="wrap">
     <div class="hero-grid">
@@ -347,9 +361,32 @@ footer{background:var(--ink);padding:36px 0;border-top:1px solid rgba(255,255,25
         </h1>
         <p class="t-lg hero-p">AppZoro designs custom software, AI solutions, and intelligent automation that eliminate bottlenecks, streamline operations, and fuel measurable business growth.</p>
         <div class="hero-actions">
-          <a href="#cta" class="btn btn-red">Get My Free Strategy Call <span class="arr">→</span></a>
+          <a href="#pre-footer" class="btn btn-red">Get My Free Strategy Call <span class="arr">→</span></a>
           <a href="#cases" class="btn btn-ghost">See Our Work <span class="arr">→</span></a>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Brand marquee -->
+  <div class="hero-brands">
+    <p class="hero-brands-lbl">Trusted by companies across industries</p>
+    <div class="marquee-wrap">
+      <div class="marquee-track">
+        <!-- Set 1 -->
+        <div class="m-logo"><img src="https://admin.appzoro.com/uploads/Freedom_logo_e514f9a485.png" alt="Freedom Rideshare" onerror="this.outerHTML='<span class=\'m-name\'>Freedom Rideshare</span>'"></div>
+        <div class="m-logo"><img src="https://admin.appzoro.com/uploads/JI_logo_dbdfdbf9be.png" alt="Judicial Innovations" onerror="this.outerHTML='<span class=\'m-name\'>Judicial Innovations</span>'"></div>
+        <div class="m-logo"><img src="https://admin.appzoro.com/uploads/spaspace_logo_445cefd2a6.png" alt="SpaSpace" onerror="this.outerHTML='<span class=\'m-name\'>SpaSpace</span>'"></div>
+        <div class="m-logo"><span class="m-name">Convoy Transports</span></div>
+        <div class="m-logo"><span class="m-name">Cowork Oasis</span></div>
+        <div class="m-logo"><span class="m-name">ADR Boost</span></div>
+        <!-- Set 2 (duplicate for seamless loop) -->
+        <div class="m-logo"><img src="https://admin.appzoro.com/uploads/Freedom_logo_e514f9a485.png" alt="Freedom Rideshare" onerror="this.outerHTML='<span class=\'m-name\'>Freedom Rideshare</span>'"></div>
+        <div class="m-logo"><img src="https://admin.appzoro.com/uploads/JI_logo_dbdfdbf9be.png" alt="Judicial Innovations" onerror="this.outerHTML='<span class=\'m-name\'>Judicial Innovations</span>'"></div>
+        <div class="m-logo"><img src="https://admin.appzoro.com/uploads/spaspace_logo_445cefd2a6.png" alt="SpaSpace" onerror="this.outerHTML='<span class=\'m-name\'>SpaSpace</span>'"></div>
+        <div class="m-logo"><span class="m-name">Convoy Transports</span></div>
+        <div class="m-logo"><span class="m-name">Cowork Oasis</span></div>
+        <div class="m-logo"><span class="m-name">ADR Boost</span></div>
       </div>
     </div>
   </div>
@@ -479,26 +516,6 @@ footer{background:var(--ink);padding:36px 0;border-top:1px solid rgba(255,255,25
         </ul>
       </div>
     </div>
-    <div class="compare rv">
-      <div class="cmp-side cmp-bad">
-        <h3>Without AppZoro</h3>
-        <div class="cmp-item"><div class="cmp-ico">✕</div>Excel sheets &amp; manual tracking</div>
-        <div class="cmp-item"><div class="cmp-ico">✕</div>Endless email chains</div>
-        <div class="cmp-item"><div class="cmp-ico">✕</div>Manual reporting (hours of work)</div>
-        <div class="cmp-item"><div class="cmp-ico">✕</div>Data entry errors &amp; rework</div>
-        <div class="cmp-item"><div class="cmp-ico">✕</div>Disconnected, siloed systems</div>
-        <div class="cmp-item"><div class="cmp-ico">✕</div>Zero visibility into operations</div>
-      </div>
-      <div class="cmp-side cmp-good">
-        <h3>With AppZoro</h3>
-        <div class="cmp-item"><div class="cmp-ico">✓</div>Automated workflows &amp; approvals</div>
-        <div class="cmp-item"><div class="cmp-ico">✓</div>Real-time dashboards</div>
-        <div class="cmp-item"><div class="cmp-ico">✓</div>AI-generated reports in seconds</div>
-        <div class="cmp-item"><div class="cmp-ico">✓</div>Accurate, centralized data</div>
-        <div class="cmp-item"><div class="cmp-ico">✓</div>All tools integrated seamlessly</div>
-        <div class="cmp-item"><div class="cmp-ico">✓</div>Complete operational visibility</div>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -548,7 +565,7 @@ footer{background:var(--ink);padding:36px 0;border-top:1px solid rgba(255,255,25
               <div class="cs-chip"><span class="cs-chip-v">AI</span><span class="cs-chip-l">First Architecture</span></div>
             </div>
             <p class="cs-quote">"Revenue managers who used to spend mornings on rate adjustments now use that time on strategy."<span class="cs-quote-attr">ADR Boost &mdash; Hotel Revenue Platform</span></p>
-            <a href="#cta" class="cs-cta-link">See How It Works →</a>
+            <a href="#pre-footer" class="cs-cta-link">See How It Works →</a>
           </div>
         </div>
 
@@ -567,7 +584,7 @@ footer{background:var(--ink);padding:36px 0;border-top:1px solid rgba(255,255,25
               <div class="cs-chip"><span class="cs-chip-v">Live</span><span class="cs-chip-l">GPS Tracking</span></div>
             </div>
             <p class="cs-quote">"Solved a logistics gap that no existing platform addressed &mdash; purpose-built from the ground up."<span class="cs-quote-attr">Convoy Transports, USA</span></p>
-            <a href="#cta" class="cs-cta-link">View the Platform →</a>
+            <a href="#pre-footer" class="cs-cta-link">View the Platform →</a>
           </div>
         </div>
 
@@ -586,7 +603,7 @@ footer{background:var(--ink);padding:36px 0;border-top:1px solid rgba(255,255,25
               <div class="cs-chip"><span class="cs-chip-v">USA</span><span class="cs-chip-l">Nationwide</span></div>
             </div>
             <p class="cs-quote">"Technology that makes justice more accessible, built and deployed without compromise."<span class="cs-quote-attr">Judicial Innovation, USA</span></p>
-            <a href="#cta" class="cs-cta-link">Explore the Solution →</a>
+            <a href="#pre-footer" class="cs-cta-link">Explore the Solution →</a>
           </div>
         </div>
 
@@ -665,50 +682,6 @@ footer{background:var(--ink);padding:36px 0;border-top:1px solid rgba(255,255,25
   </div>
 </section>
 
-<!-- CTA -->
-<section id="cta" class="section">
-  <div class="wrap">
-    <div class="cta-grid">
-      <div class="cta-left rv">
-        <div class="eyebrow">Free Digital Transformation Assessment</div>
-        <h2 class="t-h2">Find Out What's Slowing Your Business Down, Before It Costs You More.</h2>
-        <p class="t-lg">Every week spent relying on manual processes, disconnected systems, and outdated software costs your business time, money, and momentum. In a free 45-minute strategy session, our senior engineers will identify where technology can create the fastest and most measurable impact.</p>
-        <div class="cta-perks">
-          <div class="perk"><div class="perk-ck">✓</div>Full operations audit by senior engineers</div>
-          <div class="perk"><div class="perk-ck">✓</div>Custom automation opportunity map</div>
-          <div class="perk"><div class="perk-ck">✓</div>Fastest ROI opportunities identified first</div>
-          <div class="perk"><div class="perk-ck">✓</div>No sales pressure — actionable insights only</div>
-          <div class="perk"><div class="perk-ck">✓</div>100% free for qualifying businesses</div>
-        </div>
-      </div>
-      <div class="rv d2">
-        <div class="form-wrap">
-          <div class="form-title">Talk To Our Consultant</div>
-          <p class="form-sub">Fill out the form — we'll reach out within 24 hours to schedule your free session.</p>
-          <form id="af" onsubmit="handleSubmit(event)">
-            <div class="form-row">
-              <div class="fg"><label>First Name *</label><input type="text" placeholder="John" required></div>
-              <div class="fg"><label>Last Name *</label><input type="text" placeholder="Smith" required></div>
-            </div>
-            <div class="fg"><label>Business Email *</label><input type="email" placeholder="john@company.com" required></div>
-            <div class="fg"><label>Phone Number *</label><input type="tel" placeholder="+1 (555) 000-0000" required></div>
-            <div class="fg"><label>Company Name *</label><input type="text" placeholder="Your Company, Inc." required></div>
-            <div class="form-row">
-              <div class="fg"><label>Company Size</label>
-                <select><option value="">Team size…</option><option>1–10</option><option>11–50</option><option>51–200</option><option>200+</option></select>
-              </div>
-              <div class="fg"><label>Biggest Challenge</label>
-                <select><option value="">Top challenge…</option><option>Manual processes</option><option>Disconnected systems</option><option>Need custom software</option><option>Want AI solutions</option><option>Scaling operations</option></select>
-              </div>
-            </div>
-            <button type="submit" class="form-btn" id="fbtn"><span id="ftxt">Talk To Our Consultant</span><span id="farr">→</span></button>
-          </form>
-          <p class="form-prv">🔒 100% private. No spam, ever.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- PRE-FOOTER CTA -->
 <section id="pre-footer">
@@ -717,7 +690,7 @@ footer{background:var(--ink);padding:36px 0;border-top:1px solid rgba(255,255,25
       <div class="pf-text">
         <h2>Ready to Replace Outdated Processes with Technology That Scales?</h2>
         <p>Every week of delay costs more than the project itself. Book a free 45-minute strategy session with our senior engineers &mdash; no sales pitch, just actionable insights.</p>
-        <a href="#cta" class="pf-btn">Book My Free Strategy Call <span class="pf-btn-arr">→</span></a>
+        <a href="mailto:info@appzoro.com" class="pf-btn">Book My Free Strategy Call <span class="pf-btn-arr">→</span></a>
       </div>
       <svg class="pf-deco" viewBox="0 0 220 220" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <circle cx="110" cy="110" r="104" stroke="url(#r1)" stroke-width="1" stroke-dasharray="6 10" opacity=".3"/>
@@ -757,7 +730,7 @@ footer{background:var(--ink);padding:36px 0;border-top:1px solid rgba(255,255,25
 
 <!-- FLOATING CTA -->
 <div id="float-cta">
-  <a href="#cta" class="float-btn">📞 Book Free Call →</a>
+  <a href="#pre-footer" class="float-btn">📞 Book Free Call →</a>
 </div>
 
 <script>
