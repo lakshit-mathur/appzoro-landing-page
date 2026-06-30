@@ -98,7 +98,7 @@ button,input,select,textarea{font-family:var(--fb);font-size:inherit}
 .hero-p{color:var(--on-dark);max-width:510px;margin-bottom:38px}
 .hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:52px}
 .hero-rule{height:1px;background:rgba(255,255,255,.08);margin-bottom:38px}
-.hero-stats{display:flex;gap:44px}
+.hero-stats{display:flex;gap:28px;flex-wrap:wrap}
 .stat-n{font-family:var(--fd);font-size:2rem;font-weight:800;color:#fff;line-height:1;margin-bottom:5px}
 .stat-n .a{color:var(--red)}
 .stat-l{font-size:.78rem;color:rgba(255,255,255,.4)}
@@ -188,7 +188,7 @@ button,input,select,textarea{font-family:var(--fb);font-size:inherit}
 /* ── CASE STUDIES ── */
 #cases{background:#fff}
 #cases .t-h2{color:var(--ink)}
-.cases-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.cases-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:26px}
 .case-card{border:1px solid var(--rule);border-radius:var(--r-lg);overflow:hidden;background:#fff;transition:box-shadow .3s,transform .3s;cursor:pointer}
 .case-card:hover{box-shadow:0 24px 60px rgba(0,0,0,.12);transform:translateY(-8px)}
 .case-img-wrap{position:relative;overflow:hidden;height:200px;background:var(--smoke-2)}
@@ -206,20 +206,30 @@ button,input,select,textarea{font-family:var(--fb);font-size:inherit}
 .case-card:hover .case-link{opacity:1;transform:translateY(0)}
 .case-link-arr{transition:transform .2s}
 .case-card:hover .case-link-arr{transform:translateX(3px)}
+.case-metrics{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.case-metric-chip{background:var(--smoke);border-radius:var(--r-sm);padding:9px 12px;flex:1;min-width:70px;text-align:center}
+.cm-v{display:block;font-family:var(--fd);font-size:1rem;font-weight:800;color:var(--red);line-height:1}
+.cm-l{display:block;font-size:.66rem;color:var(--muted);margin-top:3px;line-height:1.3}
+.case-quote{font-size:.8rem;font-style:italic;color:var(--muted);margin:14px 0 0;padding-top:14px;border-top:1px solid var(--rule);line-height:1.6}
+.case-quote-attr{display:block;font-style:normal;font-weight:600;font-size:.75rem;color:var(--ink);margin-top:4px}
 
-/* ── HOW ── */
-#how{background:var(--smoke)}
-#how .t-h2{color:var(--ink)}
-.how-grid{display:grid;grid-template-columns:1fr 1fr;gap:68px;align-items:stretch}
-.how-img-wrap{border-radius:var(--r-lg);overflow:hidden;background:var(--ink-3);flex:1;min-height:480px}
-.how-img-wrap img{width:100%;height:100%;min-height:480px;object-fit:cover;display:block}
-.how-steps{display:flex;flex-direction:column}
-.how-step{display:flex;gap:22px;padding:28px 0;border-bottom:1px solid var(--rule);cursor:default;transition:background .2s;border-radius:var(--r-sm)}
-.how-step:last-child{border-bottom:none}
-.how-step:hover{background:rgba(230,48,37,.03);padding-left:10px}
-.step-n{font-family:var(--fd);font-size:.68rem;font-weight:800;color:var(--red);min-width:26px;padding-top:4px;letter-spacing:.05em;opacity:.7}
-.step-body .t-h3{color:var(--ink);margin-bottom:7px}
-.step-body .t-sm{font-size:.85rem;line-height:1.65}
+/* ── WHY CLIENTS ── */
+#why{background:var(--ink)}
+#why .t-h2{color:#fff}
+#why .section-intro .t-lg{color:var(--on-dark)}
+.why-cards{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+.why-card{background:var(--ink-3);border:1px solid rgba(255,255,255,.07);border-radius:var(--r-lg);padding:42px;transition:border-color .3s,transform .3s}
+.why-card:hover{border-color:rgba(230,48,37,.4);transform:translateY(-6px)}
+.why-client{display:flex;align-items:center;gap:12px;margin-bottom:20px}
+.why-client-logo{height:26px;width:auto;object-fit:contain;filter:brightness(0) invert(1);opacity:.7}
+.why-client-name{font-family:var(--fd);font-size:1rem;font-weight:700;color:#fff}
+.why-story{color:var(--on-dark);font-size:.9rem;line-height:1.75;margin-bottom:28px}
+.why-result{background:var(--ink-2);border-radius:var(--r-md);padding:22px 24px;border-left:3px solid var(--red)}
+.why-transform{display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap}
+.why-from{font-family:var(--fd);font-size:1rem;font-weight:700;color:rgba(255,255,255,.3);text-decoration:line-through}
+.why-arr{font-size:1.1rem;color:var(--red)}
+.why-to{font-family:var(--fd);font-size:1.2rem;font-weight:800;color:#fff}
+.why-outcome{font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--red);margin-top:6px}
 
 /* ── CTA ── */
 #cta{background:linear-gradient(135deg,#A81E16 0%,var(--red) 50%,#e84840 100%);position:relative;overflow:hidden}
@@ -270,16 +280,14 @@ footer{background:var(--ink);padding:36px 0;border-top:1px solid rgba(255,255,25
 @media(max-width:1024px){
   .hero-grid{grid-template-columns:1fr}
   .hero-media{display:none}
-  .prob-grid,.how-grid{grid-template-columns:1fr}
+  .prob-grid,.why-cards{grid-template-columns:1fr}
   .prob-right{position:static}
-  .how-img-wrap{position:static}
   .sol-cards{grid-template-columns:1fr 1fr}
-  .cases-grid{grid-template-columns:1fr 1fr}
 }
 @media(max-width:768px){
   .section{padding:68px 0}
   #hero{padding:120px 0 60px}
-  .sol-cards,.cases-grid{grid-template-columns:1fr}
+  .sol-cards,.cases-grid,.why-cards{grid-template-columns:1fr}
   .compare,.cta-grid{grid-template-columns:1fr}
   .form-row{grid-template-columns:1fr}
   .form-wrap{padding:30px 22px}
@@ -305,7 +313,7 @@ footer{background:var(--ink);padding:36px 0;border-top:1px solid rgba(255,255,25
 <header id="site-header">
   <div class="wrap header-inner">
     <img src="./appzoro-logo.png" class="site-logo" alt="AppZoro">
-    <a href="#cta" class="btn-header">Book Free Assessment <span>→</span></a>
+    <a href="#cta" class="btn-header">Free Strategy Call <span>→</span></a>
   </div>
 </header>
 
@@ -316,22 +324,23 @@ footer{background:var(--ink);padding:36px 0;border-top:1px solid rgba(255,255,25
   <div class="wrap">
     <div class="hero-grid">
       <div>
-        <div class="hero-badge"><div class="badge-dot"></div>Atlanta's Digital Transformation Partner</div>
+        <div class="hero-badge"><div class="badge-dot"></div>Digital Transformation Partner</div>
         <h1 class="t-hero hero-h">
-          Stop Running on<br>
-          <span class="strike">Manual Processes</span><br>
-          Start <mark>Scaling Smart</mark>
+          You Didn't Build a Business<br>
+          to Be <span class="strike">Limited</span> by<br>
+          <mark>Technology</mark>
         </h1>
-        <p class="t-lg hero-p">We help Atlanta businesses replace spreadsheets, disconnected systems, and repetitive manual work with custom software, AI automation, and intelligent digital solutions — built for how you actually operate.</p>
+        <p class="t-lg hero-p">AppZoro designs custom software, AI solutions, and intelligent automation that eliminate bottlenecks, streamline operations, and fuel measurable business growth.</p>
         <div class="hero-actions">
-          <a href="#cta" class="btn btn-red">Book Free Strategy Call <span class="arr">→</span></a>
-          <a href="#solution" class="btn btn-ghost">See Our Solutions</a>
+          <a href="#cta" class="btn btn-red">Get My Free Strategy Call <span class="arr">→</span></a>
+          <a href="#cases" class="btn btn-ghost">See Our Work <span class="arr">→</span></a>
         </div>
         <div class="hero-rule"></div>
         <div class="hero-stats">
-          <div><div class="stat-n"><span class="count" data-target="10">10</span><span class="a">+</span></div><div class="stat-l">Years in Atlanta</div></div>
-          <div><div class="stat-n"><span class="count" data-target="6">6</span><span class="a">M+</span></div><div class="stat-l">Clients Served</div></div>
-          <div><div class="stat-n"><span class="count" data-target="98">98</span><span class="a">%</span></div><div class="stat-l">Satisfaction Rate</div></div>
+          <div><div class="stat-n"><span class="count" data-target="250">250</span><span class="a">+</span></div><div class="stat-l">Products Shipped</div></div>
+          <div><div class="stat-n"><span class="count" data-target="30">30</span><span class="a">+</span></div><div class="stat-l">Industries Served</div></div>
+          <div><div class="stat-n"><span class="count" data-target="98">98</span><span class="a">%</span></div><div class="stat-l">Client Retention Rate</div></div>
+          <div><div class="stat-n"><span class="count" data-target="8">8</span><span class="a"> yrs+</span></div><div class="stat-l">Team Experience</div></div>
         </div>
       </div>
       <div class="hero-media">
@@ -356,7 +365,7 @@ footer{background:var(--ink);padding:36px 0;border-top:1px solid rgba(255,255,25
 <div id="trust">
   <div class="wrap">
     <div class="trust-row">
-      <span class="trust-lbl">Trusted by growing companies</span>
+      <span class="trust-lbl">Trusted by startups, enterprises &amp; government organizations</span>
       <div class="trust-div"></div>
       <div class="trust-logos">
         <img class="trust-logo" src="https://admin.appzoro.com/uploads/Freedom_logo_e514f9a485.png" alt="Freedom Rideshare" onerror="this.style.display='none'">
@@ -376,15 +385,15 @@ footer{background:var(--ink);padding:36px 0;border-top:1px solid rgba(255,255,25
     <div class="prob-grid">
       <div class="prob-left rv">
         <div class="eyebrow">The Problem</div>
-        <h2 class="t-h2">Manual Processes Are Quietly Killing Your Growth</h2>
-        <p class="t-lg">Every hour your team spends on spreadsheets and repetitive work is an hour your competitors spend on strategy.</p>
+        <h2 class="t-h2">Every Day You Wait Costs You More Than You Think</h2>
+        <p class="t-lg">The companies pulling ahead aren't necessarily bigger or smarter. They simply replaced outdated processes with software, automation, and AI before inefficiencies started costing them time, money, and growth.</p>
         <div class="pain-list">
-          <div class="pain rv d1"><span class="pain-n">01</span><div><strong>Teams buried in spreadsheets</strong><span>Hours wasted updating files that are always out of date and full of errors.</span></div></div>
-          <div class="pain rv d2"><span class="pain-n">02</span><div><strong>Data scattered across 5+ tools</strong><span>Customer info, orders, and reports live in systems that never talk to each other.</span></div></div>
-          <div class="pain rv d3"><span class="pain-n">03</span><div><strong>Repetitive manual tasks daily</strong><span>Your team does the same work every day that a smart system could handle in seconds.</span></div></div>
-          <div class="pain rv"><span class="pain-n">04</span><div><strong>No real-time visibility</strong><span>You see what happened last week — not what's happening right now in your business.</span></div></div>
-          <div class="pain rv"><span class="pain-n">05</span><div><strong>Processes break when you scale</strong><span>More clients = more chaos. Your current systems weren't built to grow with you.</span></div></div>
-          <div class="pain rv"><span class="pain-n">06</span><div><strong>Missed opportunities every day</strong><span>Competitors with modern systems move faster, respond quicker, and win more deals.</span></div></div>
+          <div class="pain rv d1"><span class="pain-n">01</span><div><strong>Your team is running on spreadsheets</strong><span>Every version is named "FINAL_v3_USE THIS.xlsx." Errors slip through, versions get mixed up, and your team spends hours on data entry instead of meaningful work.</span></div></div>
+          <div class="pain rv d2"><span class="pain-n">02</span><div><strong>Your data lives in five different places</strong><span>Your CRM, inventory, finance, and operations all live in separate systems. Nobody has the full picture, and by the time someone pieces everything together, the opportunity has already passed.</span></div></div>
+          <div class="pain rv d3"><span class="pain-n">03</span><div><strong>Repetitive manual work is burying your people</strong><span>Sending invoices manually. Chasing approvals over email. Copy-pasting between systems. Your best people spend their day on work that automation could complete in seconds.</span></div></div>
+          <div class="pain rv"><span class="pain-n">04</span><div><strong>You're flying blind on what's actually happening</strong><span>No live dashboards. Reports take days to produce. Major business decisions are made using outdated data instead of real-time insights.</span></div></div>
+          <div class="pain rv"><span class="pain-n">05</span><div><strong>Every new customer adds more chaos, not revenue</strong><span>Growth should create opportunity, not operational headaches. Every new client or order stretches your team further because your processes weren't built to scale.</span></div></div>
+          <div class="pain rv"><span class="pain-n">06</span><div><strong>Your competitors are pulling ahead with better technology</strong><span>They respond faster, operate more efficiently, and retain customers longer. The difference isn't their people. It's the technology powering their business.</span></div></div>
         </div>
       </div>
       <div class="prob-right rv d2">
@@ -405,9 +414,9 @@ footer{background:var(--ink);padding:36px 0;border-top:1px solid rgba(255,255,25
 <section id="solution" class="section">
   <div class="wrap">
     <div class="section-intro rv">
-      <div class="eyebrow">Our Solutions</div>
-      <h2 class="t-h2">We Build the Systems That Set You Free</h2>
-      <p class="t-lg" style="color:var(--on-dark)">Not off-the-shelf software with workarounds. Custom systems built exactly for how your business operates.</p>
+      <div class="eyebrow">The Solution</div>
+      <h2 class="t-h2">What We Build for You</h2>
+      <p class="t-lg" style="color:var(--on-dark)">From AI agents and SaaS platforms to enterprise software and mobile apps, we build scalable digital products that help businesses automate, innovate and grow.</p>
     </div>
     <div class="sol-cards">
       <div class="sol-card rv">
@@ -415,8 +424,8 @@ footer{background:var(--ink);padding:36px 0;border-top:1px solid rgba(255,255,25
         <div class="sol-body">
           <div class="eyebrow">Build</div>
           <h3 class="t-h3">Custom Software Development</h3>
-          <p class="t-sm">Systems built for your exact workflows — no generic tools, no compromises, no workarounds.</p>
-          <ul class="sol-list"><li>Web &amp; Mobile Applications</li><li>ERP, CRM &amp; Data Platforms</li><li>Real-Time Dashboards</li><li>API Integrations &amp; Portals</li></ul>
+          <p class="t-sm">Off-the-shelf software forces your business to adapt. We build software that adapts to your business, giving your team the tools they actually need.</p>
+          <ul class="sol-list"><li>Custom web &amp; mobile applications</li><li>SaaS platforms &amp; customer portals</li><li>ERP &amp; CRM systems</li><li>E-commerce solutions</li></ul>
         </div>
       </div>
       <div class="sol-card rv d1">
@@ -424,8 +433,8 @@ footer{background:var(--ink);padding:36px 0;border-top:1px solid rgba(255,255,25
         <div class="sol-body">
           <div class="eyebrow">Automate</div>
           <h3 class="t-h3">Business Process Automation</h3>
-          <p class="t-sm">Eliminate tasks eating your team's time. Let software handle the routine so people handle the important.</p>
-          <ul class="sol-list"><li>Workflow &amp; Approval Automation</li><li>Document Processing</li><li>Reporting &amp; Data Sync</li><li>Communication Automation</li></ul>
+          <p class="t-sm">If a process follows rules, software should handle it. We automate repetitive work so your team can focus on growing the business.</p>
+          <ul class="sol-list"><li>Workflow automation</li><li>API &amp; system integrations</li><li>Document processing</li><li>Live dashboards &amp; reporting</li></ul>
         </div>
       </div>
       <div class="sol-card rv d2">
@@ -433,8 +442,8 @@ footer{background:var(--ink);padding:36px 0;border-top:1px solid rgba(255,255,25
         <div class="sol-body">
           <div class="eyebrow">Intelligize</div>
           <h3 class="t-h3">AI-Powered Solutions</h3>
-          <p class="t-sm">Use AI to make better decisions, faster — without needing a data science team on staff.</p>
-          <ul class="sol-list"><li>AI Chatbots &amp; Virtual Agents</li><li>Predictive Analytics</li><li>Intelligent Document Processing</li><li>Generative AI Integration</li></ul>
+          <p class="t-sm">Turn AI into a competitive advantage with intelligent systems that automate decisions, uncover insights, and improve customer experiences.</p>
+          <ul class="sol-list"><li>AI agents</li><li>AI chatbots</li><li>Generative AI integration</li><li>Predictive analytics</li></ul>
         </div>
       </div>
     </div>
@@ -465,9 +474,9 @@ footer{background:var(--ink);padding:36px 0;border-top:1px solid rgba(255,255,25
 <section id="cases" class="section" style="background:#fff">
   <div class="wrap">
     <div class="section-intro rv" style="color:var(--muted)">
-      <div class="eyebrow">Proof</div>
+      <div class="eyebrow">Success Stories</div>
       <h2 class="t-h2" style="color:var(--ink)">Real Clients. Real Results.</h2>
-      <p class="t-lg">Three AppZoro-built platforms already transforming industries — from rideshare to law to wellness.</p>
+      <p class="t-lg">Four platforms AppZoro designed and shipped — from rideshare marketplaces to AI pricing engines to public-sector justice systems.</p>
     </div>
     <div class="cases-grid">
 
@@ -480,39 +489,72 @@ footer{background:var(--ink);padding:36px 0;border-top:1px solid rgba(255,255,25
         <div class="case-body">
           <span class="case-tag">Transportation</span>
           <h3 class="t-h3">Freedom Rideshare</h3>
-          <p class="t-sm">AppZoro built a full-featured rental fleet management platform for rideshare drivers in Houston, TX — flexible two-day rentals extensible daily, driver onboarding, and real-time vehicle tracking across Android, iOS &amp; Web.</p>
-          <div class="case-metric"><span class="metric-v">3,000+</span><span class="metric-d">Active drivers on the platform across Houston</span></div>
-          <a href="https://freedomrideshare.com" target="_blank" class="case-link">View Project <span class="case-link-arr">→</span></a>
+          <p class="t-sm">Built a rideshare rental marketplace for gig drivers with flexible daily rentals, same-day pickup, live on iOS, Android &amp; Web.</p>
+          <div class="case-metrics">
+            <div class="case-metric-chip"><span class="cm-v">3</span><span class="cm-l">Platforms Shipped</span></div>
+            <div class="case-metric-chip"><span class="cm-v">0</span><span class="cm-l">Long-Term Lock-ins</span></div>
+            <div class="case-metric-chip"><span class="cm-v">100%</span><span class="cm-l">Driver-Centric</span></div>
+          </div>
+          <p class="case-quote">"What stands out most is their strong execution and commitment to problem-solving."<span class="case-quote-attr">Cole Sturdevant, CEO &mdash; Freedom RideShare Rentals</span></p>
+          <a href="https://freedomrideshare.com" target="_blank" class="case-link">Explore the Platform <span class="case-link-arr">→</span></a>
+        </div>
+      </div>
+
+      <!-- ADR Boost -->
+      <div class="case-card rv d1">
+        <div class="case-img-wrap">
+          <img class="case-img" src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=700&q=80&fit=crop" alt="ADR Boost hotel AI pricing" onerror="this.parentElement.style.background='#EFEDE9'">
+        </div>
+        <div class="case-body">
+          <span class="case-tag">Hotel Tech / AI</span>
+          <h3 class="t-h3">ADR Boost</h3>
+          <p class="t-sm">Built an AI pricing engine that monitors hotel market conditions 24/7 and adjusts room rates dynamically, no manual input needed.</p>
+          <div class="case-metrics">
+            <div class="case-metric-chip"><span class="cm-v">24/7</span><span class="cm-l">Market Monitoring</span></div>
+            <div class="case-metric-chip"><span class="cm-v">0 hrs</span><span class="cm-l">Rate Management</span></div>
+            <div class="case-metric-chip"><span class="cm-v">AI</span><span class="cm-l">First Architecture</span></div>
+          </div>
+          <p class="case-quote">"Revenue managers who used to spend mornings on rate adjustments now use that time on strategy."<span class="case-quote-attr">ADR Boost &mdash; Hotel Revenue Platform</span></p>
+          <a href="#cta" class="case-link">See How It Works <span class="case-link-arr">→</span></a>
+        </div>
+      </div>
+
+      <!-- Convoy Transports -->
+      <div class="case-card rv d2">
+        <div class="case-img-wrap">
+          <img class="case-img" src="https://images.unsplash.com/photo-1568495248636-6432b97bd949?w=700&q=80&fit=crop" alt="Convoy Transports officer dispatch" onerror="this.parentElement.style.background='#EFEDE9'">
+        </div>
+        <div class="case-body">
+          <span class="case-tag">Law Enforcement</span>
+          <h3 class="t-h3">Convoy Transports</h3>
+          <p class="t-sm">Built an Uber-style prisoner transport platform connecting off-duty officers with agencies &mdash; cross-agency dispatch, real-time GPS tracking, iOS, Android &amp; Web.</p>
+          <div class="case-metrics">
+            <div class="case-metric-chip"><span class="cm-v">3</span><span class="cm-l">Platforms</span></div>
+            <div class="case-metric-chip"><span class="cm-v">Multi</span><span class="cm-l">Agency Dispatch</span></div>
+            <div class="case-metric-chip"><span class="cm-v">Live</span><span class="cm-l">GPS Tracking</span></div>
+          </div>
+          <p class="case-quote">"Solved a logistics gap that no existing platform addressed &mdash; purpose-built from the ground up."<span class="case-quote-attr">Convoy Transports, USA</span></p>
+          <a href="#cta" class="case-link">View the Platform <span class="case-link-arr">→</span></a>
         </div>
       </div>
 
       <!-- Judicial Innovation -->
-      <div class="case-card rv d1">
+      <div class="case-card rv d3">
         <div class="case-img-wrap">
           <img class="case-img" src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=700&q=80&fit=crop" alt="Judicial Innovation dispute resolution" onerror="this.parentElement.style.background='#EFEDE9'">
           <img class="case-client-logo" src="https://admin.appzoro.com/uploads/JI_logo_dbdfdbf9be.png" alt="Judicial Innovation" onerror="this.style.display='none'">
         </div>
         <div class="case-body">
-          <span class="case-tag">Law &amp; Justice</span>
+          <span class="case-tag">Legal / Government</span>
           <h3 class="t-h3">Judicial Innovation</h3>
-          <p class="t-sm">AppZoro engineered an Online Dispute Resolution platform enabling remote access to federal and Supreme Court cases — empowering individuals unable to physically attend court sessions to participate in legal proceedings digitally.</p>
-          <div class="case-metric"><span class="metric-v">100% Remote</span><span class="metric-d">Federal &amp; Supreme Court cases — no in-person attendance needed</span></div>
-          <a href="https://judicialinnovation.com" target="_blank" class="case-link">View Project <span class="case-link-arr">→</span></a>
-        </div>
-      </div>
-
-      <!-- SpaSpace -->
-      <div class="case-card rv d2">
-        <div class="case-img-wrap">
-          <img class="case-img" src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=700&q=80&fit=crop" alt="SpaSpace on-demand wellness booking" onerror="this.parentElement.style.background='#EFEDE9'">
-          <img class="case-client-logo" src="https://admin.appzoro.com/uploads/spaspace_logo_445cefd2a6.png" alt="SpaSpace" onerror="this.style.display='none'">
-        </div>
-        <div class="case-body">
-          <span class="case-tag">Wellness</span>
-          <h3 class="t-h3">SpaSpace</h3>
-          <p class="t-sm">AppZoro built an on-demand spa booking platform delivering personalized wellness experiences. Customers discover, book, and pay for spa services in real-time — a seamless digital experience for the self-care economy.</p>
-          <div class="case-metric"><span class="metric-v">500+</span><span class="metric-d">Spa providers live on the booking platform</span></div>
-          <a href="https://app.spaspace.com" target="_blank" class="case-link">View Project <span class="case-link-arr">→</span></a>
+          <p class="t-sm">Built an online dispute resolution platform giving citizens remote access to federal and Supreme Court proceedings, no in-person attendance required.</p>
+          <div class="case-metrics">
+            <div class="case-metric-chip"><span class="cm-v">100%</span><span class="cm-l">Remote Access</span></div>
+            <div class="case-metric-chip"><span class="cm-v">Federal</span><span class="cm-l">&amp; Supreme Court</span></div>
+            <div class="case-metric-chip"><span class="cm-v">USA</span><span class="cm-l">Nationwide</span></div>
+          </div>
+          <p class="case-quote">"Technology that makes justice more accessible, built and deployed without compromise."<span class="case-quote-attr">Judicial Innovation, USA</span></p>
+          <a href="#cta" class="case-link">Explore the Solution <span class="case-link-arr">→</span></a>
         </div>
       </div>
 
@@ -520,25 +562,49 @@ footer{background:var(--ink);padding:36px 0;border-top:1px solid rgba(255,255,25
   </div>
 </section>
 
-<!-- HOW WE HELP -->
-<section id="how" class="section" style="background:var(--smoke)">
+<!-- WHY CLIENTS CHOOSE APPZORO -->
+<section id="why" class="section">
   <div class="wrap">
     <div class="section-intro rv">
-      <div class="eyebrow">Our Process</div>
-      <h2 class="t-h2" style="color:var(--ink)">How AppZoro Transforms Your Business</h2>
-      <p class="t-lg">A proven 5-step process. From chaos to clarity — in weeks, not months.</p>
+      <div class="eyebrow">Why Clients Choose AppZoro</div>
+      <h2 class="t-h2">We Don't Just Build Software. We Solve Real Business Problems.</h2>
+      <p class="t-lg" style="color:var(--on-dark)">Here's what changes when the right technology meets the right problem.</p>
     </div>
-    <div class="how-grid">
-      <div class="how-img-wrap rv">
-        <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=800&q=80&fit=crop" alt="AppZoro strategy session" onerror="this.parentElement.style.background='#1E1E1E'">
+    <div class="why-cards">
+
+      <!-- Freedom Rideshare -->
+      <div class="why-card rv">
+        <div class="why-client">
+          <img src="https://admin.appzoro.com/uploads/Freedom_logo_e514f9a485.png" alt="Freedom Rideshare" class="why-client-logo" onerror="this.style.display='none'">
+          <span class="why-client-name">Freedom Rideshare</span>
+        </div>
+        <p class="why-story">Gig drivers in Houston were stuck with rigid 30-day rental minimums from traditional companies &mdash; too expensive, too inflexible for variable income. We built a marketplace that flipped the model entirely.</p>
+        <div class="why-result">
+          <div class="why-transform">
+            <span class="why-from">30-day lock-in</span>
+            <span class="why-arr">→</span>
+            <span class="why-to">2-day flex</span>
+          </div>
+          <div class="why-outcome">Rental Commitment, Eliminated</div>
+        </div>
       </div>
-      <div class="how-steps rv d1">
-        <div class="how-step"><span class="step-n">01</span><div class="step-body"><h3 class="t-h3">Free Digital Assessment</h3><p class="t-sm">We audit your operations, map every process, and identify your highest-ROI automation opportunities — in a single 45-minute session.</p></div></div>
-        <div class="how-step"><span class="step-n">02</span><div class="step-body"><h3 class="t-h3">Custom Transformation Roadmap</h3><p class="t-sm">Our team designs a phased roadmap with clear milestones, cost-savings projections, and a build sequence that minimizes disruption.</p></div></div>
-        <div class="how-step"><span class="step-n">03</span><div class="step-body"><h3 class="t-h3">Build &amp; Integrate</h3><p class="t-sm">We build your solution, integrate it with your existing tools, and run parallel testing so your operations never skip a beat.</p></div></div>
-        <div class="how-step"><span class="step-n">04</span><div class="step-body"><h3 class="t-h3">Launch &amp; Train Your Team</h3><p class="t-sm">Hands-on training, documentation, and onboarding support so your team is confident and effective from day one.</p></div></div>
-        <div class="how-step"><span class="step-n">05</span><div class="step-body"><h3 class="t-h3">Optimize &amp; Scale Together</h3><p class="t-sm">Ongoing support and quarterly reviews to optimize performance and add capabilities as your business grows.</p></div></div>
+
+      <!-- ADR Boost -->
+      <div class="why-card rv d1">
+        <div class="why-client">
+          <span class="why-client-name">ADR Boost</span>
+        </div>
+        <p class="why-story">Hotel revenue managers were spending hours every morning manually checking competitor rates and adjusting prices in spreadsheets &mdash; and still reacting too slowly to demand spikes. We built an AI engine that never stops watching.</p>
+        <div class="why-result">
+          <div class="why-transform">
+            <span class="why-from">Hours daily</span>
+            <span class="why-arr">→</span>
+            <span class="why-to">0 min</span>
+          </div>
+          <div class="why-outcome">Rate Management, Fully Automated</div>
+        </div>
       </div>
+
     </div>
   </div>
 </section>
@@ -548,21 +614,21 @@ footer{background:var(--ink);padding:36px 0;border-top:1px solid rgba(255,255,25
   <div class="wrap">
     <div class="cta-grid">
       <div class="cta-left rv">
-        <div class="eyebrow">Limited Spots Available</div>
-        <h2 class="t-h2">Get Your Free Digital Transformation Assessment</h2>
-        <p class="t-lg">Book a free 45-minute strategy session. We'll identify your biggest automation opportunities and give you a custom roadmap — no pitch, no pressure, no obligation.</p>
+        <div class="eyebrow">Free Digital Transformation Assessment</div>
+        <h2 class="t-h2">Find Out What's Slowing Your Business Down, Before It Costs You More.</h2>
+        <p class="t-lg">Every week spent relying on manual processes, disconnected systems, and outdated software costs your business time, money, and momentum. In a free 45-minute strategy session, our senior engineers will identify where technology can create the fastest and most measurable impact.</p>
         <div class="cta-perks">
-          <div class="perk"><div class="perk-ck">✓</div>Full operations audit (valued at $2,500)</div>
+          <div class="perk"><div class="perk-ck">✓</div>Full operations audit by senior engineers</div>
           <div class="perk"><div class="perk-ck">✓</div>Custom automation opportunity map</div>
-          <div class="perk"><div class="perk-ck">✓</div>ROI projection for your top 3 use cases</div>
+          <div class="perk"><div class="perk-ck">✓</div>Fastest ROI opportunities identified first</div>
           <div class="perk"><div class="perk-ck">✓</div>No sales pressure — actionable insights only</div>
           <div class="perk"><div class="perk-ck">✓</div>100% free for qualifying businesses</div>
         </div>
       </div>
       <div class="rv d2">
         <div class="form-wrap">
-          <div class="form-title">Claim Your Free Assessment</div>
-          <p class="form-sub">Fill out the form — we'll reach out within 24 hours to schedule.</p>
+          <div class="form-title">Talk To Our Consultant</div>
+          <p class="form-sub">Fill out the form — we'll reach out within 24 hours to schedule your free session.</p>
           <form id="af" onsubmit="handleSubmit(event)">
             <div class="form-row">
               <div class="fg"><label>First Name *</label><input type="text" placeholder="John" required></div>
@@ -579,7 +645,7 @@ footer{background:var(--ink);padding:36px 0;border-top:1px solid rgba(255,255,25
                 <select><option value="">Top challenge…</option><option>Manual processes</option><option>Disconnected systems</option><option>Need custom software</option><option>Want AI solutions</option><option>Scaling operations</option></select>
               </div>
             </div>
-            <button type="submit" class="form-btn" id="fbtn"><span id="ftxt">Claim My Free Assessment</span><span id="farr">→</span></button>
+            <button type="submit" class="form-btn" id="fbtn"><span id="ftxt">Talk To Our Consultant</span><span id="farr">→</span></button>
           </form>
           <p class="form-prv">🔒 100% private. No spam, ever.</p>
         </div>
@@ -687,7 +753,7 @@ function handleSubmit(e) {
     btn.style.background = '';
     btn.style.boxShadow = '';
     btn.disabled = false;
-    txt.textContent = 'Claim My Free Assessment ';
+    txt.textContent = 'Talk To Our Consultant ';
     arr.textContent = '→';
     e.target.reset();
   }, 5000);
