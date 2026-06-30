@@ -198,7 +198,7 @@ button,input,select,textarea{font-family:var(--fb);font-size:inherit}
 #cases{background:var(--ink)}
 #cases .t-h2{color:#fff}
 #cases .section-intro .t-lg{color:var(--on-dark)}
-.cs-carousel{position:relative;border-radius:var(--r-lg);overflow:hidden}
+.cs-carousel{position:relative;border-radius:var(--r-lg);overflow:hidden;touch-action:pan-y;user-select:none;-webkit-user-select:none}
 .cs-track{display:flex;transition:transform .55s cubic-bezier(.22,1,.36,1);will-change:transform}
 .cs-slide{min-width:100%;display:grid;grid-template-columns:55% 45%;min-height:480px;background:var(--ink-2);border-radius:var(--r-lg);overflow:hidden;border:1px solid rgba(255,255,255,.06)}
 .cs-slide-img{overflow:hidden;position:relative}
@@ -223,11 +223,9 @@ button,input,select,textarea{font-family:var(--fb);font-size:inherit}
 .cs-dots{display:flex;gap:8px;align-items:center}
 .cs-dot{height:8px;width:8px;border-radius:4px;background:rgba(255,255,255,.18);cursor:pointer;border:none;padding:0;transition:background .25s,width .3s cubic-bezier(.22,1,.36,1)}
 .cs-dot.active{background:var(--red);width:28px}
-.cs-client-bar{display:flex;align-items:center;justify-content:center;gap:36px;margin-top:36px;padding-top:32px;border-top:1px solid rgba(255,255,255,.07);flex-wrap:wrap}
-.cs-client-logo{height:22px;width:auto;object-fit:contain;filter:brightness(0) invert(1);opacity:.32;transition:opacity .2s}
-.cs-client-logo:hover{opacity:.65}
-.cs-client-name{font-family:var(--fd);font-size:.8rem;font-weight:700;letter-spacing:.04em;color:rgba(255,255,255,.22);transition:color .2s}
-.cs-client-name:hover{color:rgba(255,255,255,.5)}
+.cs-client-bar{display:flex;align-items:center;justify-content:center;min-height:52px;margin-top:32px;padding-top:28px;border-top:1px solid rgba(255,255,255,.07);transition:opacity .2s ease}
+.cs-client-active-logo{height:28px;width:auto;max-width:160px;object-fit:contain;filter:brightness(0) invert(1);opacity:.5;display:block}
+.cs-client-active-name{font-family:var(--fd);font-size:1rem;font-weight:700;letter-spacing:.05em;color:rgba(255,255,255,.35)}
 
 /* ── WHY CLIENTS ── */
 #why{background:var(--ink)}
@@ -654,15 +652,8 @@ footer{background:var(--ink);padding:36px 0;border-top:1px solid rgba(255,255,25
       <button class="cs-btn" id="csNext" aria-label="Next slide">&#8594;</button>
     </div>
 
-    <!-- Client logo bar -->
-    <div class="cs-client-bar">
-      <img class="cs-client-logo" src="https://admin.appzoro.com/uploads/Freedom_logo_e514f9a485.png" alt="Freedom Rideshare" onerror="this.style.display='none'">
-      <img class="cs-client-logo" src="https://admin.appzoro.com/uploads/JI_logo_dbdfdbf9be.png" alt="Judicial Innovation" onerror="this.style.display='none'">
-      <img class="cs-client-logo" src="https://admin.appzoro.com/uploads/spaspace_logo_445cefd2a6.png" alt="SpaSpace" onerror="this.style.display='none'">
-      <span class="cs-client-name">ADR Boost</span>
-      <span class="cs-client-name">Convoy Transports</span>
-      <span class="cs-client-name">CoreData Systems</span>
-    </div>
+    <!-- Client logo bar — updated dynamically by JS -->
+    <div class="cs-client-bar" id="csClientBar"></div>
 
   </div>
 </section>
@@ -860,18 +851,6 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   });
 });
 
-/* ── RIPPLE ON FORM BUTTON ── */
-document.querySelector('.form-btn').addEventListener('click', function(e) {
-  const r = document.createElement('span');
-  const rect = this.getBoundingClientRect();
-  const size = Math.max(rect.width, rect.height);
-  r.style.cssText = `position:absolute;width:${size}px;height:${size}px;left:${e.clientX-rect.left-size/2}px;top:${e.clientY-rect.top-size/2}px;background:rgba(255,255,255,.2);border-radius:50%;transform:scale(0);animation:ripple .5s linear;pointer-events:none`;
-  this.style.position = 'relative';
-  this.style.overflow = 'hidden';
-  this.appendChild(r);
-  setTimeout(() => r.remove(), 600);
-});
-
 /* add ripple keyframe */
 const style = document.createElement('style');
 style.textContent = '@keyframes ripple{to{transform:scale(2.5);opacity:0}}';
@@ -879,17 +858,44 @@ document.head.appendChild(style);
 
 /* ── CASE STUDY CAROUSEL ── */
 (function() {
-  const track = document.getElementById('csTrack');
+  var track = document.getElementById('csTrack');
   if (!track) return;
-  const dots = document.querySelectorAll('.cs-dot');
-  const total = track.children.length;
-  let current = 0;
-  let timer;
+
+  var carousel = track.parentElement; /* .cs-carousel */
+  var dots = document.querySelectorAll('.cs-dot');
+  var total = 4; /* number of slides */
+  var current = 0;
+  var timer;
+
+  /* Per-slide client data */
+  var clients = [
+    { img: 'https://admin.appzoro.com/uploads/Freedom_logo_e514f9a485.png', name: 'Freedom Rideshare' },
+    { img: '', name: 'ADR Boost' },
+    { img: '', name: 'Convoy Transports' },
+    { img: 'https://admin.appzoro.com/uploads/JI_logo_dbdfdbf9be.png', name: 'Judicial Innovation' }
+  ];
+
+  var bar = document.getElementById('csClientBar');
+
+  function updateBar(idx) {
+    if (!bar) return;
+    var c = clients[idx];
+    bar.style.opacity = '0';
+    setTimeout(function() {
+      if (c.img) {
+        bar.innerHTML = '<img class="cs-client-active-logo" src="' + c.img + '" alt="' + c.name + '" onerror="this.outerHTML=\'<span class=cs-client-active-name>' + c.name + '</span>\'">';
+      } else {
+        bar.innerHTML = '<span class="cs-client-active-name">' + c.name + '</span>';
+      }
+      bar.style.opacity = '1';
+    }, 200);
+  }
 
   function goTo(idx) {
     current = (idx + total) % total;
     track.style.transform = 'translateX(-' + (current * 100) + '%)';
     dots.forEach(function(d, i) { d.classList.toggle('active', i === current); });
+    updateBar(current);
   }
 
   function startAuto() { timer = setInterval(function() { goTo(current + 1); }, 5500); }
@@ -902,18 +908,29 @@ document.head.appendChild(style);
   });
 
   /* pause on hover */
-  track.parentElement.addEventListener('mouseenter', stopAuto);
-  track.parentElement.addEventListener('mouseleave', startAuto);
+  carousel.addEventListener('mouseenter', stopAuto);
+  carousel.addEventListener('mouseleave', startAuto);
 
-  /* touch/swipe */
-  var startX = 0;
-  track.addEventListener('touchstart', function(e) { startX = e.touches[0].clientX; stopAuto(); }, { passive: true });
-  track.addEventListener('touchend', function(e) {
-    var dx = e.changedTouches[0].clientX - startX;
-    if (Math.abs(dx) > 48) goTo(current + (dx < 0 ? 1 : -1));
+  /* touch/swipe — listen on carousel container, not the inner track */
+  var swipeStartX = 0;
+  var swipeStartY = 0;
+  carousel.addEventListener('touchstart', function(e) {
+    swipeStartX = e.touches[0].clientX;
+    swipeStartY = e.touches[0].clientY;
+    stopAuto();
+  }, { passive: true });
+  carousel.addEventListener('touchend', function(e) {
+    var dx = e.changedTouches[0].clientX - swipeStartX;
+    var dy = e.changedTouches[0].clientY - swipeStartY;
+    /* only trigger if horizontal swipe is dominant */
+    if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) {
+      goTo(current + (dx < 0 ? 1 : -1));
+    }
     startAuto();
   }, { passive: true });
 
+  /* initialize bar */
+  updateBar(0);
   startAuto();
 })();
 </script>
