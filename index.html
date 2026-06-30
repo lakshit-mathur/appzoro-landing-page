@@ -87,7 +87,7 @@ button,input,select,textarea{font-family:var(--fb);font-size:inherit}
 /* animated grid overlay */
 .hero-grid-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 0%,transparent 100%)}
 
-.hero-grid{display:grid;grid-template-columns:58% 42%;gap:52px;align-items:center;position:relative}
+.hero-grid{display:flex;flex-direction:column;align-items:center;text-align:center;max-width:840px;margin:0 auto;position:relative}
 .hero-badge{display:inline-flex;align-items:center;gap:10px;background:rgba(230,48,37,.12);border:1px solid rgba(230,48,37,.35);color:#ff7a72;font-size:.78rem;font-weight:600;letter-spacing:.08em;padding:7px 14px 7px 10px;border-radius:100px;margin-bottom:28px}
 .badge-dot{width:7px;height:7px;background:var(--red);border-radius:50%;animation:blink 2.4s ease-in-out infinite}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
@@ -95,8 +95,8 @@ button,input,select,textarea{font-family:var(--fb);font-size:inherit}
 .hero-h mark{background:none;color:var(--red)}
 .strike{position:relative;color:rgba(255,255,255,.28)}
 .strike::after{content:'';position:absolute;left:0;right:0;top:50%;height:3px;background:var(--red);transform:translateY(-50%);border-radius:2px}
-.hero-p{color:var(--on-dark);max-width:510px;margin-bottom:38px}
-.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:52px}
+.hero-p{color:var(--on-dark);max-width:620px;margin:0 auto 38px}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-bottom:0}
 .hero-rule{height:1px;background:rgba(255,255,255,.08);margin-bottom:38px}
 .hero-stats{display:flex;gap:28px;flex-wrap:wrap}
 .stat-n{font-family:var(--fd);font-size:2rem;font-weight:800;color:#fff;line-height:1;margin-bottom:5px}
@@ -177,33 +177,40 @@ button,input,select,textarea{font-family:var(--fb);font-size:inherit}
 .cmp-bad .cmp-ico{background:rgba(255,255,255,.07);color:rgba(255,255,255,.3)}
 .cmp-good .cmp-ico{background:rgba(255,255,255,.2);color:#fff}
 
-/* ── CASE STUDIES ── */
-#cases{background:#fff}
-#cases .t-h2{color:var(--ink)}
-.cases-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:26px}
-.case-card{border:1px solid var(--rule);border-radius:var(--r-lg);overflow:hidden;background:#fff;transition:box-shadow .3s,transform .3s;cursor:pointer}
-.case-card:hover{box-shadow:0 24px 60px rgba(0,0,0,.12);transform:translateY(-8px)}
-.case-img-wrap{position:relative;overflow:hidden;height:200px;background:var(--smoke-2)}
-.case-img{width:100%;height:200px;object-fit:cover;display:block;transition:transform .5s cubic-bezier(.22,1,.36,1)}
-.case-card:hover .case-img{transform:scale(1.07)}
-.case-client-logo{position:absolute;bottom:12px;left:12px;height:28px;width:auto;object-fit:contain;background:#fff;border-radius:6px;padding:4px 8px;box-shadow:0 2px 8px rgba(0,0,0,.15)}
-.case-body{padding:26px}
-.case-tag{display:inline-block;background:rgba(230,48,37,.08);color:var(--red);font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;border-radius:100px;margin-bottom:10px}
-.case-body .t-h3{color:var(--ink);margin-bottom:9px}
-.case-body .t-sm{margin-bottom:18px;font-size:.85rem;line-height:1.65}
-.case-metric{background:var(--smoke);border-radius:var(--r-sm);padding:14px 16px;display:flex;flex-direction:column;gap:4px}
-.metric-v{font-family:var(--fd);font-size:1.45rem;font-weight:800;color:var(--red);line-height:1;font-variant-numeric:tabular-nums}
-.metric-d{font-size:.75rem;color:var(--muted)}
-.case-link{display:inline-flex;align-items:center;gap:5px;color:var(--red);font-size:.82rem;font-weight:600;margin-top:14px;opacity:0;transform:translateY(6px);transition:opacity .25s,transform .25s}
-.case-card:hover .case-link{opacity:1;transform:translateY(0)}
-.case-link-arr{transition:transform .2s}
-.case-card:hover .case-link-arr{transform:translateX(3px)}
-.case-metrics{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
-.case-metric-chip{background:var(--smoke);border-radius:var(--r-sm);padding:9px 12px;flex:1;min-width:70px;text-align:center}
-.cm-v{display:block;font-family:var(--fd);font-size:1rem;font-weight:800;color:var(--red);line-height:1}
-.cm-l{display:block;font-size:.66rem;color:var(--muted);margin-top:3px;line-height:1.3}
-.case-quote{font-size:.8rem;font-style:italic;color:var(--muted);margin:14px 0 0;padding-top:14px;border-top:1px solid var(--rule);line-height:1.6}
-.case-quote-attr{display:block;font-style:normal;font-weight:600;font-size:.75rem;color:var(--ink);margin-top:4px}
+/* ── CASE STUDIES CAROUSEL ── */
+#cases{background:var(--ink)}
+#cases .t-h2{color:#fff}
+#cases .section-intro .t-lg{color:var(--on-dark)}
+.cs-carousel{position:relative;border-radius:var(--r-lg);overflow:hidden}
+.cs-track{display:flex;transition:transform .55s cubic-bezier(.22,1,.36,1);will-change:transform}
+.cs-slide{min-width:100%;display:grid;grid-template-columns:55% 45%;min-height:480px;background:var(--ink-2);border-radius:var(--r-lg);overflow:hidden;border:1px solid rgba(255,255,255,.06)}
+.cs-slide-img{overflow:hidden;position:relative}
+.cs-slide-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s cubic-bezier(.22,1,.36,1)}
+.cs-carousel:hover .cs-slide-img img{transform:scale(1.04)}
+.cs-slide-img::after{content:'';position:absolute;inset:0;background:linear-gradient(to right,transparent 40%,rgba(20,20,20,.7))}
+.cs-slide-body{padding:52px 44px;display:flex;flex-direction:column;justify-content:center}
+.cs-tag{display:inline-block;background:rgba(230,48,37,.12);color:var(--red);font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:5px 12px;border-radius:100px;margin-bottom:16px;width:fit-content}
+.cs-title{font-family:var(--fd);font-size:1.55rem;font-weight:800;color:#fff;line-height:1.2;margin-bottom:12px}
+.cs-desc{font-size:.87rem;color:var(--on-dark);line-height:1.75;margin-bottom:22px}
+.cs-chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px}
+.cs-chip{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:var(--r-sm);padding:10px 14px;flex:1;min-width:80px;text-align:center}
+.cs-chip-v{display:block;font-family:var(--fd);font-size:1.05rem;font-weight:800;color:var(--red);line-height:1}
+.cs-chip-l{display:block;font-size:.63rem;color:var(--on-dark);margin-top:4px;line-height:1.3}
+.cs-quote{font-size:.8rem;font-style:italic;color:rgba(255,255,255,.4);border-left:2px solid var(--red);padding-left:14px;line-height:1.65;margin-bottom:20px}
+.cs-quote-attr{display:block;font-style:normal;font-weight:600;font-size:.74rem;color:rgba(255,255,255,.55);margin-top:5px}
+.cs-cta-link{display:inline-flex;align-items:center;gap:6px;color:var(--red);font-size:.83rem;font-weight:600;transition:gap .2s}
+.cs-cta-link:hover{gap:11px}
+.cs-nav{display:flex;align-items:center;justify-content:center;gap:20px;margin-top:28px}
+.cs-btn{width:46px;height:46px;border-radius:50%;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.05);color:rgba(255,255,255,.55);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.1rem;transition:background .2s,border-color .2s,color .2s,transform .15s}
+.cs-btn:hover{background:var(--red);color:#fff;border-color:var(--red);transform:scale(1.1)}
+.cs-dots{display:flex;gap:8px;align-items:center}
+.cs-dot{height:8px;width:8px;border-radius:4px;background:rgba(255,255,255,.18);cursor:pointer;border:none;padding:0;transition:background .25s,width .3s cubic-bezier(.22,1,.36,1)}
+.cs-dot.active{background:var(--red);width:28px}
+.cs-client-bar{display:flex;align-items:center;justify-content:center;gap:36px;margin-top:36px;padding-top:32px;border-top:1px solid rgba(255,255,255,.07);flex-wrap:wrap}
+.cs-client-logo{height:22px;width:auto;object-fit:contain;filter:brightness(0) invert(1);opacity:.32;transition:opacity .2s}
+.cs-client-logo:hover{opacity:.65}
+.cs-client-name{font-family:var(--fd);font-size:.8rem;font-weight:700;letter-spacing:.04em;color:rgba(255,255,255,.22);transition:color .2s}
+.cs-client-name:hover{color:rgba(255,255,255,.5)}
 
 /* ── WHY CLIENTS ── */
 #why{background:var(--ink)}
@@ -258,6 +265,18 @@ button,input,select,textarea{font-family:var(--fb);font-size:inherit}
 @keyframes floatPulse{0%,100%{box-shadow:0 6px 24px rgba(230,48,37,.45)}50%{box-shadow:0 6px 36px rgba(230,48,37,.65)}}
 .float-btn:hover{background:var(--red-dark);animation:none;box-shadow:0 8px 32px rgba(230,48,37,.6)}
 
+/* ── PRE-FOOTER CTA ── */
+#pre-footer{background:var(--ink);padding:60px 0 40px}
+.pf-inner{background:var(--ink-2);border:1px solid rgba(255,255,255,.07);border-radius:24px;padding:56px 64px;display:flex;align-items:center;gap:48px;position:relative;overflow:hidden}
+.pf-text{flex:1;position:relative;z-index:1}
+.pf-text h2{font-family:var(--fd);font-size:clamp(1.35rem,2.5vw,1.9rem);font-weight:800;color:#fff;line-height:1.25;margin-bottom:14px;max-width:560px}
+.pf-text p{color:var(--on-dark);font-size:.9rem;line-height:1.75;max-width:500px;margin-bottom:30px}
+.pf-btn{display:inline-flex;align-items:center;gap:9px;background:var(--red);color:#fff;font-family:var(--fd);font-weight:700;font-size:.88rem;padding:13px 26px;border-radius:100px;transition:background .2s,transform .15s,box-shadow .2s;box-shadow:0 4px 16px rgba(230,48,37,.3);text-decoration:none}
+.pf-btn:hover{background:var(--red-dark);transform:translateY(-2px);box-shadow:0 8px 28px rgba(230,48,37,.45)}
+.pf-btn-arr{transition:transform .2s}
+.pf-btn:hover .pf-btn-arr{transform:translateX(4px)}
+.pf-deco{flex-shrink:0;width:220px;height:220px;opacity:.55;position:relative;z-index:0}
+
 /* ── FOOTER ── */
 footer{background:var(--ink);padding:36px 0;border-top:1px solid rgba(255,255,255,.06)}
 .footer-row{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
@@ -270,29 +289,33 @@ footer{background:var(--ink);padding:36px 0;border-top:1px solid rgba(255,255,25
 
 /* ── RESPONSIVE ── */
 @media(max-width:1024px){
-  .hero-grid{grid-template-columns:1fr}
-  .hero-media{display:none}
   .pain-grid{grid-template-columns:1fr 1fr}
   .why-cards{grid-template-columns:1fr}
   .sol-cats{grid-template-columns:1fr 1fr}
+  .cs-slide{grid-template-columns:1fr;min-height:auto}
+  .cs-slide-img{height:260px}
+  .cs-slide-img::after{background:linear-gradient(to bottom,transparent 50%,rgba(20,20,20,.7))}
+  .pf-inner{padding:44px 40px;gap:32px}
+  .pf-deco{width:160px;height:160px}
 }
 @media(max-width:768px){
   .section{padding:68px 0}
   #hero{padding:120px 0 60px}
-  .pain-grid,.sol-cats,.cases-grid,.why-cards{grid-template-columns:1fr}
+  .pain-grid,.sol-cats,.why-cards{grid-template-columns:1fr}
   .compare,.cta-grid{grid-template-columns:1fr}
   .form-row{grid-template-columns:1fr}
   .form-wrap{padding:30px 22px}
-  .hero-stats{gap:26px;flex-wrap:wrap}
   .footer-row{flex-direction:column;text-align:center}
   .footer-links{justify-content:center}
   #float-cta{bottom:20px;right:20px}
+  .cs-slide-img{height:200px}
+  .cs-slide-body{padding:28px 24px}
+  .pf-inner{padding:36px 28px;flex-direction:column;gap:24px}
+  .pf-deco{display:none}
 }
 @media(max-width:480px){
   .hero-actions{flex-direction:column}
   .hero-actions .btn{width:100%;justify-content:center}
-  .trust-logos{gap:20px}
-  .trust-logo{height:22px}
 }
 </style>
 </head>
@@ -327,49 +350,11 @@ footer{background:var(--ink);padding:36px 0;border-top:1px solid rgba(255,255,25
           <a href="#cta" class="btn btn-red">Get My Free Strategy Call <span class="arr">→</span></a>
           <a href="#cases" class="btn btn-ghost">See Our Work <span class="arr">→</span></a>
         </div>
-        <div class="hero-rule"></div>
-        <div class="hero-stats">
-          <div><div class="stat-n"><span class="count" data-target="250">250</span><span class="a">+</span></div><div class="stat-l">Products Shipped</div></div>
-          <div><div class="stat-n"><span class="count" data-target="30">30</span><span class="a">+</span></div><div class="stat-l">Industries Served</div></div>
-          <div><div class="stat-n"><span class="count" data-target="98">98</span><span class="a">%</span></div><div class="stat-l">Client Retention Rate</div></div>
-          <div><div class="stat-n"><span class="count" data-target="8">8</span><span class="a"> yrs+</span></div><div class="stat-l">Team Experience</div></div>
-        </div>
-      </div>
-      <div class="hero-media">
-        <div class="hero-img-frame">
-          <img src="https://images.unsplash.com/photo-1573496799652-408c2ac9fe98?w=900&q=80&fit=crop" alt="AppZoro team" onerror="this.parentElement.style.background='#1E1E1E'">
-        </div>
-        <div class="hcard hcard-b">
-          <div class="hc-ico">⚡</div>
-          <div><div class="hc-lbl">Avg. time reduction</div><div class="hc-val r">2,500 hrs → 15 min</div></div>
-        </div>
-        <div class="hcard hcard-t">
-          <div class="hc-lbl">Client satisfaction</div>
-          <div class="hc-val">98% happy</div>
-          <div class="hc-badge">★ Rated #1 in Atlanta</div>
-        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- TRUST BAR -->
-<div id="trust">
-  <div class="wrap">
-    <div class="trust-row">
-      <span class="trust-lbl">Trusted by startups, enterprises &amp; government organizations</span>
-      <div class="trust-div"></div>
-      <div class="trust-logos">
-        <img class="trust-logo" src="https://admin.appzoro.com/uploads/Freedom_logo_e514f9a485.png" alt="Freedom Rideshare" onerror="this.style.display='none'">
-        <img class="trust-logo" src="https://admin.appzoro.com/uploads/JI_logo_dbdfdbf9be.png" alt="Judicial Innovation" onerror="this.style.display='none'">
-        <img class="trust-logo" src="https://admin.appzoro.com/uploads/spaspace_logo_445cefd2a6.png" alt="SpaSpace" onerror="this.style.display='none'">
-        <span class="trust-n">Atlanta Health</span>
-        <span class="trust-n">PinPoint Logistics</span>
-        <span class="trust-n">CoreData Systems</span>
-      </div>
-    </div>
-  </div>
-</div>
 
 <!-- PROBLEM -->
 <section id="problem" class="section">
@@ -518,94 +503,118 @@ footer{background:var(--ink);padding:36px 0;border-top:1px solid rgba(255,255,25
 </section>
 
 <!-- CASE STUDIES -->
-<section id="cases" class="section" style="background:#fff">
+<section id="cases" class="section">
   <div class="wrap">
-    <div class="section-intro rv" style="color:var(--muted)">
+    <div class="section-intro rv">
       <div class="eyebrow">Success Stories</div>
-      <h2 class="t-h2" style="color:var(--ink)">Real Clients. Real Results.</h2>
-      <p class="t-lg">Four platforms AppZoro designed and shipped — from rideshare marketplaces to AI pricing engines to public-sector justice systems.</p>
+      <h2 class="t-h2">Real Clients. Real Results.</h2>
+      <p class="t-lg">Four platforms AppZoro designed and shipped &mdash; from rideshare marketplaces to AI pricing engines to public-sector justice systems.</p>
     </div>
-    <div class="cases-grid">
 
-      <!-- Freedom Rideshare -->
-      <div class="case-card rv">
-        <div class="case-img-wrap">
-          <img class="case-img" src="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=700&q=80&fit=crop" alt="Freedom Rideshare rental fleet" onerror="this.parentElement.style.background='#EFEDE9'">
-          <img class="case-client-logo" src="https://admin.appzoro.com/uploads/Freedom_logo_e514f9a485.png" alt="Freedom Rideshare" onerror="this.style.display='none'">
-        </div>
-        <div class="case-body">
-          <span class="case-tag">Transportation</span>
-          <h3 class="t-h3">Freedom Rideshare</h3>
-          <p class="t-sm">Built a rideshare rental marketplace for gig drivers with flexible daily rentals, same-day pickup, live on iOS, Android &amp; Web.</p>
-          <div class="case-metrics">
-            <div class="case-metric-chip"><span class="cm-v">3</span><span class="cm-l">Platforms Shipped</span></div>
-            <div class="case-metric-chip"><span class="cm-v">0</span><span class="cm-l">Long-Term Lock-ins</span></div>
-            <div class="case-metric-chip"><span class="cm-v">100%</span><span class="cm-l">Driver-Centric</span></div>
+    <div class="cs-carousel rv">
+      <div class="cs-track" id="csTrack">
+
+        <!-- Slide 1: Freedom Rideshare -->
+        <div class="cs-slide">
+          <div class="cs-slide-img">
+            <img src="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=900&q=80&fit=crop" alt="Freedom Rideshare fleet" onerror="this.parentElement.style.background='#1E1E1E'">
           </div>
-          <p class="case-quote">"What stands out most is their strong execution and commitment to problem-solving."<span class="case-quote-attr">Cole Sturdevant, CEO &mdash; Freedom RideShare Rentals</span></p>
-          <a href="https://freedomrideshare.com" target="_blank" class="case-link">Explore the Platform <span class="case-link-arr">→</span></a>
-        </div>
-      </div>
-
-      <!-- ADR Boost -->
-      <div class="case-card rv d1">
-        <div class="case-img-wrap">
-          <img class="case-img" src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=700&q=80&fit=crop" alt="ADR Boost hotel AI pricing" onerror="this.parentElement.style.background='#EFEDE9'">
-        </div>
-        <div class="case-body">
-          <span class="case-tag">Hotel Tech / AI</span>
-          <h3 class="t-h3">ADR Boost</h3>
-          <p class="t-sm">Built an AI pricing engine that monitors hotel market conditions 24/7 and adjusts room rates dynamically, no manual input needed.</p>
-          <div class="case-metrics">
-            <div class="case-metric-chip"><span class="cm-v">24/7</span><span class="cm-l">Market Monitoring</span></div>
-            <div class="case-metric-chip"><span class="cm-v">0 hrs</span><span class="cm-l">Rate Management</span></div>
-            <div class="case-metric-chip"><span class="cm-v">AI</span><span class="cm-l">First Architecture</span></div>
+          <div class="cs-slide-body">
+            <span class="cs-tag">Transportation</span>
+            <div class="cs-title">Freedom Rideshare</div>
+            <p class="cs-desc">Built a rideshare rental marketplace for gig drivers with flexible daily rentals, same-day pickup, live on iOS, Android &amp; Web.</p>
+            <div class="cs-chips">
+              <div class="cs-chip"><span class="cs-chip-v">3</span><span class="cs-chip-l">Platforms Shipped</span></div>
+              <div class="cs-chip"><span class="cs-chip-v">0</span><span class="cs-chip-l">Lock-in Contracts</span></div>
+              <div class="cs-chip"><span class="cs-chip-v">100%</span><span class="cs-chip-l">Driver-Centric</span></div>
+            </div>
+            <p class="cs-quote">"What stands out most is their strong execution and commitment to problem-solving."<span class="cs-quote-attr">Cole Sturdevant, CEO &mdash; Freedom RideShare Rentals</span></p>
+            <a href="https://freedomrideshare.com" target="_blank" class="cs-cta-link">Explore the Platform →</a>
           </div>
-          <p class="case-quote">"Revenue managers who used to spend mornings on rate adjustments now use that time on strategy."<span class="case-quote-attr">ADR Boost &mdash; Hotel Revenue Platform</span></p>
-          <a href="#cta" class="case-link">See How It Works <span class="case-link-arr">→</span></a>
         </div>
-      </div>
 
-      <!-- Convoy Transports -->
-      <div class="case-card rv d2">
-        <div class="case-img-wrap">
-          <img class="case-img" src="https://images.unsplash.com/photo-1568495248636-6432b97bd949?w=700&q=80&fit=crop" alt="Convoy Transports officer dispatch" onerror="this.parentElement.style.background='#EFEDE9'">
-        </div>
-        <div class="case-body">
-          <span class="case-tag">Law Enforcement</span>
-          <h3 class="t-h3">Convoy Transports</h3>
-          <p class="t-sm">Built an Uber-style prisoner transport platform connecting off-duty officers with agencies &mdash; cross-agency dispatch, real-time GPS tracking, iOS, Android &amp; Web.</p>
-          <div class="case-metrics">
-            <div class="case-metric-chip"><span class="cm-v">3</span><span class="cm-l">Platforms</span></div>
-            <div class="case-metric-chip"><span class="cm-v">Multi</span><span class="cm-l">Agency Dispatch</span></div>
-            <div class="case-metric-chip"><span class="cm-v">Live</span><span class="cm-l">GPS Tracking</span></div>
+        <!-- Slide 2: ADR Boost -->
+        <div class="cs-slide">
+          <div class="cs-slide-img">
+            <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=900&q=80&fit=crop" alt="ADR Boost hotel AI pricing" onerror="this.parentElement.style.background='#1E1E1E'">
           </div>
-          <p class="case-quote">"Solved a logistics gap that no existing platform addressed &mdash; purpose-built from the ground up."<span class="case-quote-attr">Convoy Transports, USA</span></p>
-          <a href="#cta" class="case-link">View the Platform <span class="case-link-arr">→</span></a>
-        </div>
-      </div>
-
-      <!-- Judicial Innovation -->
-      <div class="case-card rv d3">
-        <div class="case-img-wrap">
-          <img class="case-img" src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=700&q=80&fit=crop" alt="Judicial Innovation dispute resolution" onerror="this.parentElement.style.background='#EFEDE9'">
-          <img class="case-client-logo" src="https://admin.appzoro.com/uploads/JI_logo_dbdfdbf9be.png" alt="Judicial Innovation" onerror="this.style.display='none'">
-        </div>
-        <div class="case-body">
-          <span class="case-tag">Legal / Government</span>
-          <h3 class="t-h3">Judicial Innovation</h3>
-          <p class="t-sm">Built an online dispute resolution platform giving citizens remote access to federal and Supreme Court proceedings, no in-person attendance required.</p>
-          <div class="case-metrics">
-            <div class="case-metric-chip"><span class="cm-v">100%</span><span class="cm-l">Remote Access</span></div>
-            <div class="case-metric-chip"><span class="cm-v">Federal</span><span class="cm-l">&amp; Supreme Court</span></div>
-            <div class="case-metric-chip"><span class="cm-v">USA</span><span class="cm-l">Nationwide</span></div>
+          <div class="cs-slide-body">
+            <span class="cs-tag">Hotel Tech / AI</span>
+            <div class="cs-title">ADR Boost</div>
+            <p class="cs-desc">Built an AI pricing engine that monitors hotel market conditions 24/7 and adjusts room rates dynamically &mdash; zero manual input.</p>
+            <div class="cs-chips">
+              <div class="cs-chip"><span class="cs-chip-v">24/7</span><span class="cs-chip-l">Market Monitoring</span></div>
+              <div class="cs-chip"><span class="cs-chip-v">0 hrs</span><span class="cs-chip-l">Rate Management</span></div>
+              <div class="cs-chip"><span class="cs-chip-v">AI</span><span class="cs-chip-l">First Architecture</span></div>
+            </div>
+            <p class="cs-quote">"Revenue managers who used to spend mornings on rate adjustments now use that time on strategy."<span class="cs-quote-attr">ADR Boost &mdash; Hotel Revenue Platform</span></p>
+            <a href="#cta" class="cs-cta-link">See How It Works →</a>
           </div>
-          <p class="case-quote">"Technology that makes justice more accessible, built and deployed without compromise."<span class="case-quote-attr">Judicial Innovation, USA</span></p>
-          <a href="#cta" class="case-link">Explore the Solution <span class="case-link-arr">→</span></a>
         </div>
-      </div>
 
+        <!-- Slide 3: Convoy Transports -->
+        <div class="cs-slide">
+          <div class="cs-slide-img">
+            <img src="https://images.unsplash.com/photo-1568495248636-6432b97bd949?w=900&q=80&fit=crop" alt="Convoy Transports dispatch" onerror="this.parentElement.style.background='#1E1E1E'">
+          </div>
+          <div class="cs-slide-body">
+            <span class="cs-tag">Law Enforcement</span>
+            <div class="cs-title">Convoy Transports</div>
+            <p class="cs-desc">Built an Uber-style prisoner transport platform connecting off-duty officers with agencies &mdash; cross-agency dispatch, real-time GPS, iOS, Android &amp; Web.</p>
+            <div class="cs-chips">
+              <div class="cs-chip"><span class="cs-chip-v">3</span><span class="cs-chip-l">Platforms</span></div>
+              <div class="cs-chip"><span class="cs-chip-v">Multi</span><span class="cs-chip-l">Agency Dispatch</span></div>
+              <div class="cs-chip"><span class="cs-chip-v">Live</span><span class="cs-chip-l">GPS Tracking</span></div>
+            </div>
+            <p class="cs-quote">"Solved a logistics gap that no existing platform addressed &mdash; purpose-built from the ground up."<span class="cs-quote-attr">Convoy Transports, USA</span></p>
+            <a href="#cta" class="cs-cta-link">View the Platform →</a>
+          </div>
+        </div>
+
+        <!-- Slide 4: Judicial Innovation -->
+        <div class="cs-slide">
+          <div class="cs-slide-img">
+            <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=900&q=80&fit=crop" alt="Judicial Innovation dispute resolution" onerror="this.parentElement.style.background='#1E1E1E'">
+          </div>
+          <div class="cs-slide-body">
+            <span class="cs-tag">Legal / Government</span>
+            <div class="cs-title">Judicial Innovation</div>
+            <p class="cs-desc">Built an online dispute resolution platform giving citizens remote access to federal and Supreme Court proceedings &mdash; no in-person attendance required.</p>
+            <div class="cs-chips">
+              <div class="cs-chip"><span class="cs-chip-v">100%</span><span class="cs-chip-l">Remote Access</span></div>
+              <div class="cs-chip"><span class="cs-chip-v">Federal</span><span class="cs-chip-l">&amp; Supreme Court</span></div>
+              <div class="cs-chip"><span class="cs-chip-v">USA</span><span class="cs-chip-l">Nationwide</span></div>
+            </div>
+            <p class="cs-quote">"Technology that makes justice more accessible, built and deployed without compromise."<span class="cs-quote-attr">Judicial Innovation, USA</span></p>
+            <a href="#cta" class="cs-cta-link">Explore the Solution →</a>
+          </div>
+        </div>
+
+      </div>
     </div>
+
+    <!-- Navigation -->
+    <div class="cs-nav">
+      <button class="cs-btn" id="csPrev" aria-label="Previous slide">&#8592;</button>
+      <div class="cs-dots">
+        <button class="cs-dot active" data-idx="0" aria-label="Slide 1"></button>
+        <button class="cs-dot" data-idx="1" aria-label="Slide 2"></button>
+        <button class="cs-dot" data-idx="2" aria-label="Slide 3"></button>
+        <button class="cs-dot" data-idx="3" aria-label="Slide 4"></button>
+      </div>
+      <button class="cs-btn" id="csNext" aria-label="Next slide">&#8594;</button>
+    </div>
+
+    <!-- Client logo bar -->
+    <div class="cs-client-bar">
+      <img class="cs-client-logo" src="https://admin.appzoro.com/uploads/Freedom_logo_e514f9a485.png" alt="Freedom Rideshare" onerror="this.style.display='none'">
+      <img class="cs-client-logo" src="https://admin.appzoro.com/uploads/JI_logo_dbdfdbf9be.png" alt="Judicial Innovation" onerror="this.style.display='none'">
+      <img class="cs-client-logo" src="https://admin.appzoro.com/uploads/spaspace_logo_445cefd2a6.png" alt="SpaSpace" onerror="this.style.display='none'">
+      <span class="cs-client-name">ADR Boost</span>
+      <span class="cs-client-name">Convoy Transports</span>
+      <span class="cs-client-name">CoreData Systems</span>
+    </div>
+
   </div>
 </section>
 
@@ -697,6 +706,37 @@ footer{background:var(--ink);padding:36px 0;border-top:1px solid rgba(255,255,25
           <p class="form-prv">🔒 100% private. No spam, ever.</p>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRE-FOOTER CTA -->
+<section id="pre-footer">
+  <div class="wrap">
+    <div class="pf-inner rv">
+      <div class="pf-text">
+        <h2>Ready to Replace Outdated Processes with Technology That Scales?</h2>
+        <p>Every week of delay costs more than the project itself. Book a free 45-minute strategy session with our senior engineers &mdash; no sales pitch, just actionable insights.</p>
+        <a href="#cta" class="pf-btn">Book My Free Strategy Call <span class="pf-btn-arr">→</span></a>
+      </div>
+      <svg class="pf-deco" viewBox="0 0 220 220" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="110" cy="110" r="104" stroke="url(#r1)" stroke-width="1" stroke-dasharray="6 10" opacity=".3"/>
+        <circle cx="110" cy="110" r="82" stroke="url(#r1)" stroke-width="1.5" stroke-dasharray="5 9" opacity=".42"/>
+        <circle cx="110" cy="110" r="60" stroke="url(#r1)" stroke-width="1.5" stroke-dasharray="4 8" opacity=".55"/>
+        <circle cx="110" cy="110" r="40" stroke="url(#r1)" stroke-width="2" stroke-dasharray="3 7" opacity=".65"/>
+        <circle cx="110" cy="110" r="22" stroke="url(#r1)" stroke-width="2" opacity=".78"/>
+        <circle cx="110" cy="110" r="9" fill="url(#r2)" opacity=".9"/>
+        <defs>
+          <linearGradient id="r1" x1="0" y1="0" x2="220" y2="220" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#E63025"/>
+            <stop offset="100%" stop-color="#FF6058"/>
+          </linearGradient>
+          <radialGradient id="r2" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#E63025"/>
+            <stop offset="100%" stop-color="#E63025" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+      </svg>
     </div>
   </div>
 </section>
@@ -830,6 +870,46 @@ document.querySelector('.form-btn').addEventListener('click', function(e) {
 const style = document.createElement('style');
 style.textContent = '@keyframes ripple{to{transform:scale(2.5);opacity:0}}';
 document.head.appendChild(style);
+
+/* ── CASE STUDY CAROUSEL ── */
+(function() {
+  const track = document.getElementById('csTrack');
+  if (!track) return;
+  const dots = document.querySelectorAll('.cs-dot');
+  const total = track.children.length;
+  let current = 0;
+  let timer;
+
+  function goTo(idx) {
+    current = (idx + total) % total;
+    track.style.transform = 'translateX(-' + (current * 100) + '%)';
+    dots.forEach(function(d, i) { d.classList.toggle('active', i === current); });
+  }
+
+  function startAuto() { timer = setInterval(function() { goTo(current + 1); }, 5500); }
+  function stopAuto() { clearInterval(timer); }
+
+  document.getElementById('csPrev').addEventListener('click', function() { stopAuto(); goTo(current - 1); startAuto(); });
+  document.getElementById('csNext').addEventListener('click', function() { stopAuto(); goTo(current + 1); startAuto(); });
+  dots.forEach(function(d) {
+    d.addEventListener('click', function() { stopAuto(); goTo(+d.dataset.idx); startAuto(); });
+  });
+
+  /* pause on hover */
+  track.parentElement.addEventListener('mouseenter', stopAuto);
+  track.parentElement.addEventListener('mouseleave', startAuto);
+
+  /* touch/swipe */
+  var startX = 0;
+  track.addEventListener('touchstart', function(e) { startX = e.touches[0].clientX; stopAuto(); }, { passive: true });
+  track.addEventListener('touchend', function(e) {
+    var dx = e.changedTouches[0].clientX - startX;
+    if (Math.abs(dx) > 48) goTo(current + (dx < 0 ? 1 : -1));
+    startAuto();
+  }, { passive: true });
+
+  startAuto();
+})();
 </script>
 </body>
 </html>
